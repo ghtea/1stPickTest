@@ -200,7 +200,7 @@ function  applyTable() {
   let colPlayRate = currentMap + ' popularity';
   let colBanRate = currentMap + ' ban_rate';
   for (var i = 0; i < numHero; i++) {
-    let currentPoint = parseFloat(rows[k].toString());
+    let currentPoint = parseFloat(rows[k].toString());/*재정렬을 위한비교에 데이터 타입문제 해결분제 아직 미결*/
     for (var k=0; k<numBero; k++) {
       if(rows[k].getAttribute("id") == "rowHeroID" + dataList[i]["HeroID"]) {
         
