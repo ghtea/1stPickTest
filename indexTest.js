@@ -32,6 +32,7 @@ const numSizeWin = 4.6;
 const numSizePlay = 0.3;
 const stdWinRate = 3.6;
 const stdGame = 19;
+const adjustRank = 13;
 
 var roleInitial;
 var roleColor;
@@ -171,6 +172,8 @@ function updatePoint() {
   let currentMap = document.getElementById("sltMap").value;
   let currentDifficulty = document.getElementById("sltDifficulty").value;
   let currentRatio = document.getElementById("rgRatio").value;
+  let currentRatio2 = document.getElementById("rgRatio2").value;
+  
   let rows = document.getElementsByClassName("rowTableMain");
   
   let colWinRate = currentMap + ' win_rate';
@@ -179,11 +182,12 @@ function updatePoint() {
   
   for (const [key, value] of Object.entries(data)) {
     value['Point'] =
-    (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) +
-      currentRatio *
+      (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) 
+      + currentRatio *
         ((((value[colBanRate] + value[colPlayRate])/ 100) * numHero) /
           16 /
-          stdGame);
+          stdGame) 
+      + (currentRatio2 - 50) / adjustRank * (value['Difficulty'] -3);
   }
 
   dataList = Object.values(data)
@@ -413,6 +417,14 @@ rgRatio.addEventListener("change", function() {
   applyTable();
   sortTable();
 });
+
+rgRatio2.addEventListener("change", function() {
+  updatePoint();
+  applyTable();
+  sortTable();
+});
+
+
 
 sltDifficulty.addEventListener("change", hideSome);
 
