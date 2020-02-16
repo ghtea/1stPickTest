@@ -42,7 +42,8 @@ function compaireFunc(key) {
   };
 }
 
-function updateJson() {
+
+function makeRows() {
   let currentMap = document.getElementById("sltMap").value;
   let currentDifficulty = document.getElementById("sltDifficulty").value;
   let currentRatio = document.getElementById("rgRatio").value;
@@ -52,19 +53,6 @@ function updateJson() {
   let colPlayRate = currentMap + ' popularity';
   let colBanRate = currentMap + ' ban_rate';
   
-  for (const [key, value] of Object.entries(data)) {
-    value['Point'] =
-    (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) +
-      currentRatio *
-        ((((value[colBanRate] + value[colPlayRate])/ 100) * numHero) /
-          16 /
-          stdGame);
-  }
-
-  dataList = Object.values(data)
-}
-
-function makeRows() {
   /*
   dataListSorted = dataList.sort(compaireFunc("Point"));
   console.log(dataListSorted)
@@ -75,6 +63,8 @@ function makeRows() {
     }
   }
   */
+  dataList = Object.values(data)
+  
   for (var i = 0; i < numHero; i++) {
     var row = tbl.insertRow(i + 1);
     var cell1 = row.insertCell(0);
@@ -176,6 +166,30 @@ function makeRows() {
   }
 }
   
+  
+function updatePoint() {
+  let currentMap = document.getElementById("sltMap").value;
+  let currentDifficulty = document.getElementById("sltDifficulty").value;
+  let currentRatio = document.getElementById("rgRatio").value;
+  let rows = document.getElementsByClassName("rowTableMain");
+  
+  let colWinRate = currentMap + ' win_rate';
+  let colPlayRate = currentMap + ' popularity';
+  let colBanRate = currentMap + ' ban_rate';
+  
+  for (const [key, value] of Object.entries(data)) {
+    value['Point'] =
+    (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) +
+      currentRatio *
+        ((((value[colBanRate] + value[colPlayRate])/ 100) * numHero) /
+          16 /
+          stdGame);
+  }
+
+  dataList = Object.values(data)
+}
+ 
+  
 function  applyTable() {
   let currentMap = document.getElementById("sltMap").value;
   let currentDifficulty = document.getElementById("sltDifficulty").value;
@@ -226,7 +240,7 @@ function sortTable() {
     switching = false;
     /*Loop through all table rows (except the
     first, which contains table headers):*/
-    for (var k=0; k<numBero; k++) {
+    for (var k=0; k<numHero; k++) {
       //start by saying there should be no switching:
       shouldSwitch = false;
       /*Get the two elements you want to compare,
@@ -260,9 +274,7 @@ function hideSome() {
   let colPlayRate = currentMap + ' popularity'
   let colBanRate = currentMap + ' ban_rate'
   
-  var rows = document.getElementsByClassName("rowTableMain");
-
-
+  let rows = document.getElementsByClassName("rowTableMain");
 
   var currentRoleCheckedTank = cbxRoleTank.checked;
   var currentRoleCheckedBruiser = cbxRoleBruiser.checked;
@@ -270,21 +282,6 @@ function hideSome() {
   var currentRoleCheckedRanged = cbxRoleRanged.checked;
   var currentRoleCheckedHealer = cbxRoleHealer.checked;
   var currentRoleCheckedSupport = cbxRoleSupport.checked;
-
-  /* about Ratio */
-  var currentRatio = document.getElementById("rgRatio").value;
-  
-  for (const [key, value] of Object.entries(data)) {
-    value['Point'] =
-    (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) +
-      currentRatio *
-        ((((value[colBanRate] + value[colPlayRate])/ 100) * numHero) /
-          16 /
-          stdGame);
-  }
-  dataList = Object.values(data)
-  dataListSorted = dataList.sort(compaireFunc("Point"));
- 
  
   checkedRoles = [];
   if (currentRoleCheckedTank == true) {
@@ -342,8 +339,8 @@ function hideSome() {
 
   /*console.log(rows[3]);*/
   /*just check https://stackoverflow.com/questions/31831651/javascript-filter-array-multiple-conditions*/
-  for (var rowNum = 1; rowNum <= numHero; rowNum++) {
-    var currentRow = document.querySelectorAll("#tableMain tr")[rowNum];
+  for (var k = 0; k < numHero; k++) {
+    var currentRow = rows[k];
     /* https://stackoverflow.com/questions/16312528/check-if-an-array-contains-any-element-of-another-array-in-javascript/29447130 */
     /* 한 배열에 여러 특정 값들이 있는지 확인 */
     if (
@@ -365,13 +362,11 @@ function hideSome() {
 }
 
 function checkSome() {
-  for (var rowNum = 0; rowNum < numHero; rowNum++) {
-    var currentRow = document.querySelectorAll("#tableMain tbody tr")[
-      rowNum + 1
-    ];
-    var currentChecked = document.querySelectorAll(
-      "#tableMain tbody tr .cbxPerHero"
-    )[rowNum].checked;
+
+  let rows = document.getElementsByClassName("rowTableMain");
+  for (var k = 0; k < numHero; k++) {
+    var currentRow = rows[k];
+    var currentChecked = document.querySelectorAll("#tableMain tbody tr .cbxPerHero")[k].checked;
     /*console.log(currentChecked);*/
     if (currentChecked == true) {
       currentRow.classList.add("rowCheck");
@@ -386,8 +381,8 @@ function scrollToTop() {
 }
 
 window.onload = function(){
-  updateJson();
   makeRows();
+  updatePoint();
   applyTable();
   sortTable();
 };
@@ -397,11 +392,9 @@ btnClear.addEventListener("click", function() {
 });
 
 sltMap.addEventListener("change", function() {
-  updateJson();
+  updatePoint();
   applyTable();
   sortTable();
-  hideSome();
-  checkSome();
   
   /*
 document.getElementById("sltDifficulty").value = 5;
@@ -416,11 +409,9 @@ document.getElementById("sltDifficulty").value = 5;
 
 
 rgRatio.addEventListener("change", function() {
-  updateJson();
+  updatePoint();
   applyTable();
   sortTable();
-  hideSome();
-  checkSome();
 });
 
 sltDifficulty.addEventListener("change", hideSome);
