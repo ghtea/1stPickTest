@@ -47,16 +47,14 @@ function showAll() {
   var currentMap = document.getElementById("sltMap").value;
   /*var currentDifficulty = document.getElementById("sltDifficulty").value;*/
 
-  let colHero
-  let colHeroID
-  let colDifficulty
-  let colRole
-  
   let colWinRate = currentMap + ' win_rate'
   let colPlayRate = currentMap + ' popularity'
   let colBanRate = currentMap + ' ban_rate'
   
-
+  console.log(data['0'][colWinRate])
+  console.log(data['0'][colPlayRate])
+  console.log(data['0'][colBanRate])
+  
   var rows = document.getElementsByClassName("rowTableMain");
 
   /* about Ratio */
