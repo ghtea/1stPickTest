@@ -53,7 +53,8 @@ h1 {
 #divRatio, #divRatio2 {
   height: 35px;
   width: 335px;
-  margin-left: 30px;
+  margin-left: auto !important;
+  margin-right: auto !important;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,7 +79,7 @@ h1 {
 }
 
 /* ratio bar */
-#divRatio > :nth-child(2) {
+#divRatio > :nth-child(2), #divRatio2 > :nth-child(2){
   width: 175px;
 }
 
