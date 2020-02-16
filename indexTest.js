@@ -31,10 +31,10 @@ var btnClear = document.getElementById("btnClear");
 var divScroll = document.getElementById("divScroll");
 var btnScroll = document.getElementById("btnScroll");
 
-var numSizeWin = 4.6;
-var numSizePlay = 0.3;
-var stdWinRate = 3.6;
-var stdGame = 19;
+const numSizeWin = 4.6;
+const numSizePlay = 0.3;
+const stdWinRate = 3.6;
+const stdGame = 19;
 
 var roleInitial;
 var roleColor;
@@ -45,20 +45,7 @@ function compaireFunc(key) {
   };
 }
 
-/* 아래 listToMatrix 이용 안하는 듯?*/
-function listToMatrix(list, elementsPerSubArray) {
-  var matrix = [],
-    i,
-    k;
-  for (i = 0, k = -1; i < list.length; i++) {
-    if (i % elementsPerSubArray === 0) {
-      k++;
-      matrix[k] = [];
-    }
-    matrix[k].push(list[i]);
-  }
-  return matrix;
-}
+
 
 function showAll() {
   var currentMap = document.getElementById("sltMap").value;
@@ -81,20 +68,20 @@ function showAll() {
   
   
   
-for (const [key, value] of Object.entries(data)) {
-  value['Point'] =
+  for (const [key, value] of Object.entries(data)) {
+    value['Point'] =
     (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) +
       currentRatio *
         ((((value[colBanRate] + value[colPlayRate])/ 100) * numHero) /
           16 /
           stdGame);
-}
+  }
   
 
-dataList = Object.values(data)
-  
+  dataList = Object.values(data)
   dataListSorted = dataList.sort(compaireFunc("Point"));
  
+  
   if (rows.length > 0) {
     for (var i = 0; i < numHero; i++) {
       tbl.deleteRow(1);
@@ -111,23 +98,24 @@ dataList = Object.values(data)
 
     row.classList.add("rowTableMain");
     /*row.classList.add("rowShow");*/
-    row.setAttribute("id", "rowHeroID" + dataSorted[i]["HeroID"]);
-    row.classList.add("rowDifficulty" + dataSorted[i]["Difficulty"]);
-    row.classList.add("rowRole" + dataSorted[i]["Role"]);
+    row.setAttribute("id", "rowHeroID" + dataListSorted[i]["HeroID"]);
+    row.classList.add("rowDifficulty" + dataListSorted[i]["Difficulty"]);
+    row.classList.add("rowRole" + dataListSorted[i]["Role"]);
 
     cell1.innerHTML =
       "<a target='_blank' rel='noopener noreferrer' href=" +
       URLfront +
-      dataSorted[i]["URLID"] +
+      dataListSorted[i]["URLID"] +
       URLback +
       "> <img src=" +
       "heroImages/" +
-      dataSorted[i]["HeroID"] +
+      dataListSorted[i]["HeroID"] +
       ".png" +
       ">" +
       "</a>";
-
-    switch (dataSorted[i]["Role"]) {
+    
+    /* not using
+    switch (dataListSorted[i]["Role"]) {
       case "Tank":
         roleInitial = "T";
         break;
@@ -146,26 +134,27 @@ dataList = Object.values(data)
       case "Support":
         roleInitial = "S";
         break;
-    }
+    } */
+    
     var divRoleTd = document.createElement("div");
     var rectRole = document.createElement("div");
-    rectRole.setAttribute("class", "role" + dataSorted[i]["Role"]);
+    rectRole.setAttribute("class", "role" + dataListSorted[i]["Role"]);
     rectRole.innerHTML = roleInitial;
     divRoleTd.appendChild(rectRole);
     cell2.appendChild(divRoleTd);
 
-    for (var k = 0; k < parseInt(dataSorted[i]["Difficulty"]); k++) {
+    for (var k = 0; k < parseInt(dataListSorted[i]["Difficulty"]); k++) {
       var rectDifficulty = [];
       rectDifficulty[k] = document.createElement("div");
       cell3.appendChild(rectDifficulty[k]);
     }
-    cell3.setAttribute("class", "difficulty" + dataSorted[i]["Difficulty"]);
+    cell3.setAttribute("class", "difficulty" + dataListSorted[i]["Difficulty"]);
 
     cell4.setAttribute("class", "cellMain");
     var rectMain = document.createElement("div");
-    var rectMainWidth = (dataSorted[i]["WinRate"] - 35) * numSizeWin;
+    var rectMainWidth = (dataListSorted[i]["WinRate"] - 35) * numSizeWin;
     var rectMainHeight =
-      (dataSorted[i]["PlayRate"] + dataSorted[i]["BanRate"]) * numSizePlay;
+      (dataListSorted[i]["PlayRate"] + dataListSorted[i]["BanRate"]) * numSizePlay;
 
     rectMain.style =
       "width:" +
@@ -182,8 +171,8 @@ dataList = Object.values(data)
     cell4.appendChild(rectMain);
 
     var divText = document.createElement("div");
-    var txtGames = (100 / dataSorted[i]["PlayRate"]).toFixed(1);
-    var txtWinRate = dataSorted[i]["WinRate"].toFixed(1);
+    var txtGames = (100 / dataListSorted[i]["PlayRate"]).toFixed(1);
+    var txtWinRate = dataListSorted[i]["WinRate"].toFixed(1);
     divText.innerHTML = txtWinRate + "%" + "<br> 1 in " + txtGames + "G";
     divText.setAttribute("class", "divRectText");
     cell4.appendChild(divText);
@@ -213,16 +202,21 @@ function hideSome() {
 
   /* about Ratio */
   var currentRatio = document.getElementById("rgRatio").value;
-  for (var i = 0; i < numHero; i++) {
-    dataMap[i]["Point"] =
-      (100 - currentRatio) * (dataMap[i]["WinRate"] / 50 / stdWinRate) +
+  
+  
+  
+  for (const [key, value] of Object.entries(data)) {
+    value['Point'] =
+    (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) +
       currentRatio *
-        ((((dataMap[i]["PlayRate"] + dataMap[i]["BanRate"]) / 100) * 88) /
+        ((((value[colBanRate] + value[colPlayRate])/ 100) * numHero) /
           16 /
           stdGame);
   }
-  dataSorted = dataMap.sort(compaireFunc("Point"));
-
+  dataList = Object.values(data)
+  dataListSorted = dataList.sort(compaireFunc("Point"));
+ 
+ 
   checkedRoles = [];
   if (currentRoleCheckedTank == true) {
     checkedRoles.push("rowRoleTank");
