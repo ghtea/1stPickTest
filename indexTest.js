@@ -83,19 +83,18 @@ function showAll() {
   
 for (const [key, value] of Object.entries(data)) {
   value['Point'] =
-    (100 - currentRatio) * (data[colWinRate]/ 50 / stdWinRate) +
+    (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) +
       currentRatio *
-        ((((data[colBanRate] + data[colPlayRate])/ 100) * numHero) /
+        ((((value[colBanRate] + value[colPlayRate])/ 100) * numHero) /
           16 /
           stdGame);
 }
   
-  
-  
-  
-  
-  dataSorted = dataMap.sort(compaireFunc("Point"));
 
+dataList = Object.values(data)
+  
+  dataListSorted = dataList.sort(compaireFunc("Point"));
+ 
   if (rows.length > 0) {
     for (var i = 0; i < numHero; i++) {
       tbl.deleteRow(1);
