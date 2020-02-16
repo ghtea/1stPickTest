@@ -6,12 +6,8 @@ var URLfront = "https://www.heroesprofile.com/Global/Matchups/?hero=";
 var URLback =
   "&timeframe_type=minor&timeframe=2.49.2.77981,2.49.1.77692,2.49.1.77662&game_type=sl";
 
-var numHero = 88;
-var dataMap = [];
-var dataMapRole = [];
-var dataFiltered1 = [];
-var dataFiltered2 = [];
-var dataSorted = [];
+const numHero = 88;
+
 var cbxPerHeroList = [];
 var checkedRoles = [];
 var checkedDifficulties = [];
@@ -31,10 +27,10 @@ var btnClear = document.getElementById("btnClear");
 var divScroll = document.getElementById("divScroll");
 var btnScroll = document.getElementById("btnScroll");
 
-var numSizeWin = 4.6;
-var numSizePlay = 0.3;
-var stdWinRate = 3.6;
-var stdGame = 19;
+const numSizeWin = 4.6;
+const numSizePlay = 0.3;
+const stdWinRate = 3.6;
+const stdGame = 19;
 
 var roleInitial;
 var roleColor;
@@ -45,43 +41,75 @@ function compaireFunc(key) {
   };
 }
 
-/* 아래 listToMatrix 이용 안하는 듯?*/
-function listToMatrix(list, elementsPerSubArray) {
-  var matrix = [],
-    i,
-    k;
-  for (i = 0, k = -1; i < list.length; i++) {
-    if (i % elementsPerSubArray === 0) {
-      k++;
-      matrix[k] = [];
+
+function sortTable() {
+  let table, rows, switching, i, x, y, shouldSwitch;
+  
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    rows = tbl.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = rows[i].getElementsByTagName("TD")[0];
+      y = rows[i + 1].getElementsByTagName("TD")[0];
+      //check if the two rows should switch place:
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
     }
-    matrix[k].push(list[i]);
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
   }
-  return matrix;
 }
 
+
+
 function showAll() {
-  var currentMap = document.getElementById("sltMap").value;
-  /*var currentDifficulty = document.getElementById("sltDifficulty").value;*/
+  let currentMap = document.getElementById("sltMap").value;
+  let currentDifficulty = document.getElementById("sltDifficulty").value;
 
-  var idxStart = currentMap * numHero;
-  var idxEnd = currentMap * numHero + numHero;
-  dataMap = dataOriginal.slice(idxStart, idxEnd);
+  
+  let colWinRate = currentMap + ' win_rate'
+  let colPlayRate = currentMap + ' popularity'
+  let colBanRate = currentMap + ' ban_rate'
 
+  
   var rows = document.getElementsByClassName("rowTableMain");
 
   /* about Ratio */
   var currentRatio = document.getElementById("rgRatio").value;
-  for (var i = 0; i < numHero; i++) {
-    dataMap[i]["Point"] =
-      (100 - currentRatio) * (dataMap[i]["WinRate"] / 50 / stdWinRate) +
+  
+  
+  
+  for (const [key, value] of Object.entries(data)) {
+    value['Point'] =
+    (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) +
       currentRatio *
-        ((((dataMap[i]["PlayRate"] + dataMap[i]["BanRate"]) / 100) * 88) /
+        ((((value[colBanRate] + value[colPlayRate])/ 100) * numHero) /
           16 /
           stdGame);
   }
-  dataSorted = dataMap.sort(compaireFunc("Point"));
 
+  dataList = Object.values(data)
+  dataListSorted = dataList.sort(compaireFunc("Point"));
+  console.log(dataListSorted)
+ 
+  
   if (rows.length > 0) {
     for (var i = 0; i < numHero; i++) {
       tbl.deleteRow(1);
@@ -98,23 +126,24 @@ function showAll() {
 
     row.classList.add("rowTableMain");
     /*row.classList.add("rowShow");*/
-    row.setAttribute("id", "rowHeroID" + dataSorted[i]["HeroID"]);
-    row.classList.add("rowDifficulty" + dataSorted[i]["Difficulty"]);
-    row.classList.add("rowRole" + dataSorted[i]["Role"]);
+    row.setAttribute("id", "rowHeroID" + dataListSorted[i]["HeroID"]);
+    row.classList.add("rowDifficulty" + dataListSorted[i]["Difficulty"]);
+    row.classList.add("rowRole" + dataListSorted[i]["Role"]);
 
     cell1.innerHTML =
       "<a target='_blank' rel='noopener noreferrer' href=" +
       URLfront +
-      dataSorted[i]["URLID"] +
+      dataListSorted[i]["URLID"] +
       URLback +
       "> <img src=" +
       "heroImages/" +
-      dataSorted[i]["HeroID"] +
+      dataListSorted[i]["HeroID"] +
       ".png" +
       ">" +
       "</a>";
-
-    switch (dataSorted[i]["Role"]) {
+    
+    
+    switch (dataListSorted[i]["Role"]) {
       case "Tank":
         roleInitial = "T";
         break;
@@ -133,26 +162,27 @@ function showAll() {
       case "Support":
         roleInitial = "S";
         break;
-    }
+    } 
+    
     var divRoleTd = document.createElement("div");
     var rectRole = document.createElement("div");
-    rectRole.setAttribute("class", "role" + dataSorted[i]["Role"]);
+    rectRole.setAttribute("class", "role" + dataListSorted[i]["Role"]);
     rectRole.innerHTML = roleInitial;
     divRoleTd.appendChild(rectRole);
     cell2.appendChild(divRoleTd);
 
-    for (var k = 0; k < parseInt(dataSorted[i]["Difficulty"]); k++) {
+    for (var k = 0; k < parseInt(dataListSorted[i]["Difficulty"]); k++) {
       var rectDifficulty = [];
       rectDifficulty[k] = document.createElement("div");
       cell3.appendChild(rectDifficulty[k]);
     }
-    cell3.setAttribute("class", "difficulty" + dataSorted[i]["Difficulty"]);
+    cell3.setAttribute("class", "difficulty" + dataListSorted[i]["Difficulty"]);
 
     cell4.setAttribute("class", "cellMain");
     var rectMain = document.createElement("div");
-    var rectMainWidth = (dataSorted[i]["WinRate"] - 35) * numSizeWin;
+    var rectMainWidth = (dataListSorted[i][colWinRate] - 35) * numSizeWin;
     var rectMainHeight =
-      (dataSorted[i]["PlayRate"] + dataSorted[i]["BanRate"]) * numSizePlay;
+      (dataListSorted[i][colPlayRate]+ dataListSorted[i][colBanRate]) * numSizePlay;
 
     rectMain.style =
       "width:" +
@@ -169,8 +199,8 @@ function showAll() {
     cell4.appendChild(rectMain);
 
     var divText = document.createElement("div");
-    var txtGames = (100 / dataSorted[i]["PlayRate"]).toFixed(1);
-    var txtWinRate = dataSorted[i]["WinRate"].toFixed(1);
+    var txtGames = (100 / dataListSorted[i][colPlayRate]).toFixed(1);
+    var txtWinRate = dataListSorted[i][colWinRate].toFixed(1);
     divText.innerHTML = txtWinRate + "%" + "<br> 1 in " + txtGames + "G";
     divText.setAttribute("class", "divRectText");
     cell4.appendChild(divText);
@@ -187,9 +217,16 @@ function showAll() {
 }
 
 function hideSome() {
+  let currentMap = document.getElementById("sltMap").value;
+  let currentDifficulty = document.getElementById("sltDifficulty").value;
+  
+  let colWinRate = currentMap + ' win_rate'
+  let colPlayRate = currentMap + ' popularity'
+  let colBanRate = currentMap + ' ban_rate'
+  
   var rows = document.getElementsByClassName("rowTableMain");
 
-  var currentDifficulty = document.getElementById("sltDifficulty").value;
+
 
   var currentRoleCheckedTank = cbxRoleTank.checked;
   var currentRoleCheckedBruiser = cbxRoleBruiser.checked;
@@ -200,16 +237,19 @@ function hideSome() {
 
   /* about Ratio */
   var currentRatio = document.getElementById("rgRatio").value;
-  for (var i = 0; i < numHero; i++) {
-    dataMap[i]["Point"] =
-      (100 - currentRatio) * (dataMap[i]["WinRate"] / 50 / stdWinRate) +
+  
+  for (const [key, value] of Object.entries(data)) {
+    value['Point'] =
+    (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) +
       currentRatio *
-        ((((dataMap[i]["PlayRate"] + dataMap[i]["BanRate"]) / 100) * 88) /
+        ((((value[colBanRate] + value[colPlayRate])/ 100) * numHero) /
           16 /
           stdGame);
   }
-  dataSorted = dataMap.sort(compaireFunc("Point"));
-
+  dataList = Object.values(data)
+  dataListSorted = dataList.sort(compaireFunc("Point"));
+ 
+ 
   checkedRoles = [];
   if (currentRoleCheckedTank == true) {
     checkedRoles.push("rowRoleTank");
