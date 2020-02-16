@@ -186,8 +186,39 @@ function  applyPointSortTable() {
   let colPlayRate = currentMap + ' popularity';
   let colBanRate = currentMap + ' ban_rate';
   for (var i = 0; i < numHero; i++) {
-    rows[i].get
-    dataList[i]
+    let currentPoint = parseFloat(rows[k].);
+    for (var k=0; k<numBero; k++) {
+      if(rows[k].getAttribute("id") == "rowHeroID" + dataList[i]["HeroID"] ){
+        rows[k]["data-point"] = dataList[i]["Point"].toString();
+        
+        
+        cell4.setAttribute("class", "cellMain");
+        var rectMain = document.createElement("div");
+        var rectMainWidth = (dataList[i][colWinRate] - 35) * numSizeWin;
+        var rectMainHeight =
+      (dataList[i][colPlayRate]+ dataList[i][colBanRate]) * numSizePlay;
+
+        rectMain.style =
+          "width:" +
+          rectMainWidth +
+          "px;height:" +
+          rectMainHeight +
+          "px; background: linear-gradient(200deg, rgba(105,245,168,1) 0%, rgba(17,226,97,1) 40%, rgba(17,226,97,1) 100%); ";
+        rectMain.setAttribute("class", "rectMain");
+    /* followings don't work
+        Rect.style.width = RectWidth + "px;" ;
+        Rect.style.height = RectHeight + "px;" ;
+        Rect.setAttribute("class", "boxWG");
+        */
+        cell4.appendChild(rectMain);
+
+        var divText = document.createElement("div");
+        var txtGames = (100 / dataList[i][colPlayRate]).toFixed(1);
+        var txtWinRate = dataList[i][colWinRate].toFixed(1);
+        divText.innerHTML = txtWinRate + "%" + "<br> 1 in " + txtGames + "G";
+        divText.setAttribute("class", "divRectText");
+        cell4.appendChild(divText);
+      }
   }
 
 
