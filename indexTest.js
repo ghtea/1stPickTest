@@ -44,8 +44,8 @@ function compaireFunc(key) {
 
 
 function showAll() {
-  var currentMap = document.getElementById("sltMap").value;
-  /*var currentDifficulty = document.getElementById("sltDifficulty").value;*/
+  let currentMap = document.getElementById("sltMap").value;
+  let currentDifficulty = document.getElementById("sltDifficulty").value;
 
   
   let colWinRate = currentMap + ' win_rate'
@@ -181,9 +181,16 @@ function showAll() {
 }
 
 function hideSome() {
+  let currentMap = document.getElementById("sltMap").value;
+  let currentDifficulty = document.getElementById("sltDifficulty").value;
+  
+  let colWinRate = currentMap + ' win_rate'
+  let colPlayRate = currentMap + ' popularity'
+  let colBanRate = currentMap + ' ban_rate'
+  
   var rows = document.getElementsByClassName("rowTableMain");
 
-  var currentDifficulty = document.getElementById("sltDifficulty").value;
+
 
   var currentRoleCheckedTank = cbxRoleTank.checked;
   var currentRoleCheckedBruiser = cbxRoleBruiser.checked;
@@ -194,8 +201,6 @@ function hideSome() {
 
   /* about Ratio */
   var currentRatio = document.getElementById("rgRatio").value;
-  
-  
   
   for (const [key, value] of Object.entries(data)) {
     value['Point'] =
