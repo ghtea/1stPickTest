@@ -200,8 +200,8 @@ function  applyTable() {
   let colPlayRate = currentMap + ' popularity';
   let colBanRate = currentMap + ' ban_rate';
   for (var i = 0; i < numHero; i++) {
-    let currentPoint = parseFloat(rows[k].toString());/*재정렬을 위한비교에 데이터 타입문제 해결분제 아직 미결*/
-    for (var k=0; k<numBero; k++) {
+    let currentPoint = parseFloat(rows[i].getAttribute("data-point"));
+    for (var k=0; k<numHero; k++) {
       if(rows[k].getAttribute("id") == "rowHeroID" + dataList[i]["HeroID"]) {
         
         rows[k]["data-point"] = dataList[i]["Point"].toString();
@@ -240,13 +240,13 @@ function sortTable() {
     switching = false;
     /*Loop through all table rows (except the
     first, which contains table headers):*/
-    for (var k=0; k<numHero; k++) {
+    for (var k=0; k<numHero-1; k++) {
       //start by saying there should be no switching:
       shouldSwitch = false;
       /*Get the two elements you want to compare,
       one from current row and one from the next:*/
-      x = rows[k].getAttribute('data-point');
-      y = rows[k + 1].getAttribute('data-point');
+      x = parseFloat(rows[k].getAttribute('data-point'));
+      y = parseFloat(rows[k + 1].getAttribute('data-point'));
       //check if the two rows should switch place:
       if (x < y) {
         //if so, mark as a switch and break the loop:
