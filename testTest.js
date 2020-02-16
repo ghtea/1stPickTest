@@ -17,4 +17,4 @@ for (const [key, value] of Object.entries(data)) {
 console.log(data)
 
 
-document.getElementById("test").innerText = toString(test)
+document.getElementById("test").innerText = toString(data)
