@@ -64,8 +64,14 @@ function showAll() {
   var currentMap = document.getElementById("sltMap").value;
   /*var currentDifficulty = document.getElementById("sltDifficulty").value;*/
 
-  var idxStart = currentMap * numHero;
-  var idxEnd = currentMap * numHero + numHero;
+  let colHero
+  let colHeroID
+  let colDifficulty
+  let colRole
+  let colWinRate
+  let colPlayRate
+  let colBanRate
+  
   dataMap = dataOriginal.slice(idxStart, idxEnd);
 
   var rows = document.getElementsByClassName("rowTableMain");
