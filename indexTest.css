@@ -50,7 +50,7 @@ h1 {
   font-size: 0.8rem;
 }
 
-#divRatio {
+#divRatio, #divRatio2 {
   height: 35px;
   width: 335px;
   margin-left: 30px;
@@ -64,12 +64,13 @@ h1 {
   padding: 5px;
 }
 
-/* Win Rate */
-#divRatio > :nth-child(1) {
+/* Winrate and 3 more*/
+#divRatio > div, #divRatio2 > div {
   display: table;
   width: 70px;
 }
-#divRatio > :nth-child(1) > div {
+
+.txtRg {
   width: 70px;
   height: 35px;
   display: table-cell;
@@ -81,12 +82,9 @@ h1 {
   width: 175px;
 }
 
-/* Number of Games */
-#divRatio > :nth-child(3) {
+/* Number of Games,  Bronze Games, Mastee Games */
+#divRatio > :nth-child(3), #divRatio2 > :nth-child(1), #divRatio2 > :nth-child(3) {
   font-size: 0.9rem;
-  width: 70px;
-  display: table-cell;
-  vertical-align: middle;
 }
 
 #divSlt {
@@ -135,6 +133,8 @@ h1 {
 
 #divRatio > p,
 #divRatio > input,
+#divRatio2 > p,
+#divRatio2 > input,
 #divContact > p,
 #divContact > a {
   position: static;
