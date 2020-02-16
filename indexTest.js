@@ -204,7 +204,7 @@ function  applyTable() {
     for (var k=0; k<numHero; k++) {
       if(rows[k].getAttribute("id") == "rowHeroID" + dataList[i]["HeroID"]) {
         
-        rows[k]["data-point"] = dataList[i]["Point"].toString();
+        rows[k].setAttribute("data-point", dataList[i]["Point"].toString());
         
         let rectMain = document.querySelectorAll(".rowTableMain .rectMain")[k]
         let rectMainWidth = (dataList[i][colWinRate] - 35) * numSizeWin;
@@ -247,6 +247,8 @@ function sortTable() {
       one from current row and one from the next:*/
       x = parseFloat(rows[k].getAttribute('data-point'));
       y = parseFloat(rows[k + 1].getAttribute('data-point'));
+      console.log(x);
+      console.log(y);
       //check if the two rows should switch place:
       if (x < y) {
         //if so, mark as a switch and break the loop:
