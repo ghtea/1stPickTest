@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- https://stackoverflow.com/questions/8195741/how-do-they-do-this-mobile-site-added-to-homescreen-appears-as-standalone-app -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <meta
+      name="viewport"
+      content="width=device-width, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>1st Pick</title>
+
+    <link rel="stylesheet" href="indexTest.css" />
+    <link
+      rel="apple-touch-icon"
+      sizes="128x128"
+      href="app_icon/app_icon_128.png"
+    />
+  </head>
+
+  <body>
+    <div id="content">
+      <div id="nonTable">
+        <div id="divh1"><h1>1st Pick in Draft</h1></div>
+        <div id="divInput">
+          <div id="guideRatio">What is more important?</div>
+          <div id="divRatio">
+            <div><div>Winrate</div></div>
+            <div><input id="rgRatio" type="range" /></div>
+            <div>
+              Number <br />
+              of Games
+            </div>
+          </div>
+          <div id="divSlt">
+            <div id="divMap">
+              <select id="sltMap">
+                <option value="0">Alterac Pass</option>
+                <option value="1">Battlefield of Eternity</option>
+                <option value="2">Braxis Holdout</option>
+                <option value="3">Cursed Hollow</option>
+                <option value="4">Dragon Shire</option>
+                <option value="5" selected>Hanamura Temple</option>
+                <option value="6">Infernal Shrines</option>
+                <option value="7">Sky Temple</option>
+                <option value="8">Tomb of the Spider Queen</option>
+                <option value="9">Towers of Doom</option>
+                <option value="10">Volskaya Foundry</option>
+              </select>
+            </div>
+
+            <div id="divDifficulty">
+              <select id="sltDifficulty">
+                <option value="1">Only Very Easy</option>
+                <option value="2">Very Easy ~ Easy</option>
+                <option value="3">Easy ~ Medium</option>
+                <option value="4">Easy ~ Hard</option>
+                <option value="5" selected>All Difficulty</option>
+              </select>
+            </div>
+
+            <div id="divClear">
+              <label id="labelClear"
+                ><input type="button" value="clear" id="btnClear" />clear</label
+              >
+            </div>
+          </div>
+
+          <div id="divRole">
+            <label
+              ><input
+                type="checkbox"
+                class="cbxRole"
+                id="cbxRoleTank"
+                checked
+              />
+              Tank</label
+            >
+            <label
+              ><input
+                type="checkbox"
+                class="cbxRole"
+                id="cbxRoleBruiser"
+                checked
+              />
+              Bruiser</label
+            >
+            <label
+              ><input
+                type="checkbox"
+                class="cbxRole"
+                id="cbxRoleMelee"
+                checked
+              />
+              Melee</label
+            >
+            <label
+              ><input
+                type="checkbox"
+                class="cbxRole"
+                id="cbxRoleRanged"
+                checked
+              />
+              Ranged</label
+            >
+            <label
+              ><input
+                type="checkbox"
+                class="cbxRole"
+                id="cbxRoleHealer"
+                checked
+              />
+              Healer</label
+            >
+            <label
+              ><input
+                type="checkbox"
+                class="cbxRole"
+                id="cbxRoleSupport"
+                checked
+              />
+              Support</label
+            >
+          </div>
+        </div>
+      </div>
+      <table id="tableMain">
+        <colgroup>
+          <!-- img -->
+          <col class="col1" />
+          <!-- role -->
+          <col class="col2" />
+          <!-- difficulty -->
+          <col class="col3" />
+          <!-- rect -->
+          <col class="col4" />
+          <!-- point -->
+          <col class="col5" />
+        </colgroup>
+        <tr>
+          <th>Hero</th>
+          <th colspan="2">
+            Role / <br />
+            Difficulty
+          </th>
+          <th>
+            width: Winrate <br />
+            height: Play+Ban
+          </th>
+          <th>
+            Pick / <br />
+            Ban
+          </th>
+        </tr>
+      </table>
+
+      <p id="dataDate">data of 2019. 12. 17. ~ 2020. 1. 29.</p>
+
+      <div id="divContact">
+        <p>contact:</p>
+        <a href="https://twitter.com/mbcat_hots">@mbcat_hots</a>
+      </div>
+    </div>
+    <div id="divScroll">
+      <label><input type="button" id="btnScroll" />Top</label>
+    </div>
+    <!-- <script src="others/d3/d3.min.js"></script> -->
+    <script src="others/jquery.csv.js"></script>
+    <script src="dataTest.js"></script>
+    <script src="indexTest.js"></script>
+  </body>
+</html>
