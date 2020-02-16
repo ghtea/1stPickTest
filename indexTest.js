@@ -6,12 +6,8 @@ var URLfront = "https://www.heroesprofile.com/Global/Matchups/?hero=";
 var URLback =
   "&timeframe_type=minor&timeframe=2.49.2.77981,2.49.1.77692,2.49.1.77662&game_type=sl";
 
-var numHero = 88;
-var dataMap = [];
-var dataMapRole = [];
-var dataFiltered1 = [];
-var dataFiltered2 = [];
-var dataSorted = [];
+const numHero = 88;
+
 var cbxPerHeroList = [];
 var checkedRoles = [];
 var checkedDifficulties = [];
@@ -76,10 +72,10 @@ function showAll() {
           16 /
           stdGame);
   }
-  
 
   dataList = Object.values(data)
   dataListSorted = dataList.sort(compaireFunc("Point"));
+  console.log(dataListSorted)
  
   
   if (rows.length > 0) {
