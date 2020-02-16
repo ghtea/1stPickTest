@@ -206,7 +206,7 @@ function  applyTable() {
         
         rows[k]["data-point"] = dataList[i]["Point"].toString();
         
-        let rectMain = document.querySelectorAll(.rowTableMain .rectMain)[k]
+        let rectMain = document.querySelectorAll(".rowTableMain .rectMain")[k]
         let rectMainWidth = (dataList[i][colWinRate] - 35) * numSizeWin;
         let rectMainHeight =
       (dataList[i][colPlayRate]+ dataList[i][colBanRate]) * numSizePlay;
@@ -219,13 +219,13 @@ function  applyTable() {
           "px; background: linear-gradient(200deg, rgba(105,245,168,1) 0%, rgba(17,226,97,1) 40%, rgba(17,226,97,1) 100%); ";
         
         
-        let divText = document.querySelectorAll(.rowTableMain .divRectText)[k]
+        let divText = document.querySelectorAll(".rowTableMain .divRectText")[k]
         let txtGames = (100 / dataList[i][colPlayRate]).toFixed(1);
         let txtWinRate = dataList[i][colWinRate].toFixed(1);
         divText.innerHTML = txtWinRate + "%" + "<br> 1 in " + txtGames + "G";
       }
+    }
   }
-
 }
 
 function sortTable() {
