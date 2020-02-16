@@ -152,9 +152,9 @@ function showAll() {
 
     cell4.setAttribute("class", "cellMain");
     var rectMain = document.createElement("div");
-    var rectMainWidth = (dataListSorted[i]["WinRate"] - 35) * numSizeWin;
+    var rectMainWidth = (dataListSorted[i][colWinRate] - 35) * numSizeWin;
     var rectMainHeight =
-      (dataListSorted[i]["PlayRate"] + dataListSorted[i]["BanRate"]) * numSizePlay;
+      (dataListSorted[i][colPlayRate]+ dataListSorted[i][colBanRate]) * numSizePlay;
 
     rectMain.style =
       "width:" +
@@ -171,8 +171,8 @@ function showAll() {
     cell4.appendChild(rectMain);
 
     var divText = document.createElement("div");
-    var txtGames = (100 / dataListSorted[i]["PlayRate"]).toFixed(1);
-    var txtWinRate = dataListSorted[i]["WinRate"].toFixed(1);
+    var txtGames = (100 / dataListSorted[i][colPlayRate]).toFixed(1);
+    var txtWinRate = dataListSorted[i][colWinRate].toFixed(1);
     divText.innerHTML = txtWinRate + "%" + "<br> 1 in " + txtGames + "G";
     divText.setAttribute("class", "divRectText");
     cell4.appendChild(divText);
