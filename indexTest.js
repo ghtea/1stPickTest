@@ -8,6 +8,7 @@ var URLback =
 
 const numHero = 88;
 
+var dataList = [];
 var cbxPerHeroList = [];
 var checkedRoles = [];
 var checkedDifficulties = [];
@@ -41,8 +42,31 @@ function compaireFunc(key) {
   };
 }
 
+function updateJson() {
+  let currentMap = document.getElementById("sltMap").value;
+  let currentDifficulty = document.getElementById("sltDifficulty").value;
+  let currentRatio = document.getElementById("rgRatio").value;
+  let rows = document.getElementsByClassName("rowTableMain");
+  
+  let colWinRate = currentMap + ' win_rate';
+  let colPlayRate = currentMap + ' popularity';
+  let colBanRate = currentMap + ' ban_rate';
+  
+  for (const [key, value] of Object.entries(data)) {
+    value['Point'] =
+    (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) +
+      currentRatio *
+        ((((value[colBanRate] + value[colPlayRate])/ 100) * numHero) /
+          16 /
+          stdGame);
+  }
 
-function sortTable() {
+  dataList = Object.values(data)
+}
+
+
+  
+function  applyPointSortTable() {
   let table, rows, switching, i, x, y, shouldSwitch;
   
   switching = true;
@@ -59,10 +83,10 @@ function sortTable() {
       shouldSwitch = false;
       /*Get the two elements you want to compare,
       one from current row and one from the next:*/
-      x = rows[i].getElementsByTagName("TD")[0];
-      y = rows[i + 1].getElementsByTagName("TD")[0];
+      x = rows[i].getAttribute('data-point');
+      y = rows[i + 1].getAttribute('data-point');
       //check if the two rows should switch place:
-      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+      if (x < y) {
         //if so, mark as a switch and break the loop:
         shouldSwitch = true;
         break;
@@ -78,43 +102,17 @@ function sortTable() {
 }
 
 
-
-function showAll() {
-  let currentMap = document.getElementById("sltMap").value;
-  let currentDifficulty = document.getElementById("sltDifficulty").value;
-
-  
-  let colWinRate = currentMap + ' win_rate'
-  let colPlayRate = currentMap + ' popularity'
-  let colBanRate = currentMap + ' ban_rate'
-
-  
-  var rows = document.getElementsByClassName("rowTableMain");
-
-  /* about Ratio */
-  var currentRatio = document.getElementById("rgRatio").value;
-  
-  
-  
-  for (const [key, value] of Object.entries(data)) {
-    value['Point'] =
-    (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) +
-      currentRatio *
-        ((((value[colBanRate] + value[colPlayRate])/ 100) * numHero) /
-          16 /
-          stdGame);
-  }
-
-  dataList = Object.values(data)
+function makeRows() {
+  /*
   dataListSorted = dataList.sort(compaireFunc("Point"));
   console.log(dataListSorted)
  
-  
   if (rows.length > 0) {
     for (var i = 0; i < numHero; i++) {
       tbl.deleteRow(1);
     }
   }
+  */
 
   for (var i = 0; i < numHero; i++) {
     var row = tbl.insertRow(i + 1);
@@ -129,6 +127,7 @@ function showAll() {
     row.setAttribute("id", "rowHeroID" + dataListSorted[i]["HeroID"]);
     row.classList.add("rowDifficulty" + dataListSorted[i]["Difficulty"]);
     row.classList.add("rowRole" + dataListSorted[i]["Role"]);
+    row.setAttribute("data-point", dataListSorted[i]["Point"].toString());
 
     cell1.innerHTML =
       "<a target='_blank' rel='noopener noreferrer' href=" +
@@ -349,13 +348,20 @@ function scrollToTop() {
   window.scrollTo(0, 0);
 }
 
-window.onload = showAll();
+window.onload = function(){
+  updateJson();
+  makeRows();
+  applyPointSortTable();
+};
+
 sltMap.addEventListener("change", function() {
-  showAll();
+  updateJson();
+  applyPointSortTable();
   hideSome();
   checkSome();
+  
   /*
-  document.getElementById("sltDifficulty").value = 5;
+document.getElementById("sltDifficulty").value = 5;
   cbxRoleTank.checked = true;
   cbxRoleBruiser.checked = true;
   cbxRoleMelee.checked = true;
@@ -369,7 +375,8 @@ btnClear.addEventListener("click", function() {
 });
 
 rgRatio.addEventListener("change", function() {
-  showAll();
+  updateJson();
+  applyPointSortTable();
   hideSome();
   checkSome();
 });
