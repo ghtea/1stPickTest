@@ -176,7 +176,7 @@ function makeRows() {
   }
 }
   
-function  applyPointSortTable() {
+function  applyTable() {
   let currentMap = document.getElementById("sltMap").value;
   let currentDifficulty = document.getElementById("sltDifficulty").value;
   let currentRatio = document.getElementById("rgRatio").value;
@@ -186,16 +186,15 @@ function  applyPointSortTable() {
   let colPlayRate = currentMap + ' popularity';
   let colBanRate = currentMap + ' ban_rate';
   for (var i = 0; i < numHero; i++) {
-    let currentPoint = parseFloat(rows[k].);
+    let currentPoint = parseFloat(rows[k].toString());
     for (var k=0; k<numBero; k++) {
-      if(rows[k].getAttribute("id") == "rowHeroID" + dataList[i]["HeroID"] ){
+      if(rows[k].getAttribute("id") == "rowHeroID" + dataList[i]["HeroID"]) {
+        
         rows[k]["data-point"] = dataList[i]["Point"].toString();
         
-        
-        cell4.setAttribute("class", "cellMain");
-        var rectMain = document.createElement("div");
-        var rectMainWidth = (dataList[i][colWinRate] - 35) * numSizeWin;
-        var rectMainHeight =
+        let rectMain = document.querySelectorAll(.rowTableMain .rectMain)[k]
+        let rectMainWidth = (dataList[i][colWinRate] - 35) * numSizeWin;
+        let rectMainHeight =
       (dataList[i][colPlayRate]+ dataList[i][colBanRate]) * numSizePlay;
 
         rectMain.style =
@@ -204,26 +203,20 @@ function  applyPointSortTable() {
           "px;height:" +
           rectMainHeight +
           "px; background: linear-gradient(200deg, rgba(105,245,168,1) 0%, rgba(17,226,97,1) 40%, rgba(17,226,97,1) 100%); ";
-        rectMain.setAttribute("class", "rectMain");
-    /* followings don't work
-        Rect.style.width = RectWidth + "px;" ;
-        Rect.style.height = RectHeight + "px;" ;
-        Rect.setAttribute("class", "boxWG");
-        */
-        cell4.appendChild(rectMain);
-
-        var divText = document.createElement("div");
-        var txtGames = (100 / dataList[i][colPlayRate]).toFixed(1);
-        var txtWinRate = dataList[i][colWinRate].toFixed(1);
+        
+        
+        let divText = document.querySelectorAll(.rowTableMain .divRectText)[k]
+        let txtGames = (100 / dataList[i][colPlayRate]).toFixed(1);
+        let txtWinRate = dataList[i][colWinRate].toFixed(1);
         divText.innerHTML = txtWinRate + "%" + "<br> 1 in " + txtGames + "G";
-        divText.setAttribute("class", "divRectText");
-        cell4.appendChild(divText);
       }
   }
 
+}
 
-
-  let table, rows, switching, i, x, y, shouldSwitch;
+function sortTable() {
+  let rows = document.getElementsByClassName("rowTableMain");
+  let switching, x, y, shouldSwitch;
   
   switching = true;
   /*Make a loop that will continue until
@@ -231,16 +224,15 @@ function  applyPointSortTable() {
   while (switching) {
     //start by saying: no switching is done:
     switching = false;
-    rows = tbl.rows;
     /*Loop through all table rows (except the
     first, which contains table headers):*/
-    for (i = 1; i < (rows.length - 1); i++) {
+    for (var k=0; k<numBero; k++) {
       //start by saying there should be no switching:
       shouldSwitch = false;
       /*Get the two elements you want to compare,
       one from current row and one from the next:*/
-      x = rows[i].getAttribute('data-point');
-      y = rows[i + 1].getAttribute('data-point');
+      x = rows[k].getAttribute('data-point');
+      y = rows[k + 1].getAttribute('data-point');
       //check if the two rows should switch place:
       if (x < y) {
         //if so, mark as a switch and break the loop:
@@ -251,7 +243,7 @@ function  applyPointSortTable() {
     if (shouldSwitch) {
       /*If a switch has been marked, make the switch
       and mark that a switch has been done:*/
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      rows[k].parentNode.insertBefore(rows[k + 1], rows[k]);
       switching = true;
     }
   }
@@ -396,12 +388,18 @@ function scrollToTop() {
 window.onload = function(){
   updateJson();
   makeRows();
-  applyPointSortTable();
+  applyTable();
+  sortTable();
 };
+
+btnClear.addEventListener("click", function() {
+  location.reload();
+});
 
 sltMap.addEventListener("change", function() {
   updateJson();
-  applyPointSortTable();
+  applyTable();
+  sortTable();
   hideSome();
   checkSome();
   
@@ -415,16 +413,16 @@ document.getElementById("sltDifficulty").value = 5;
   cbxRoleSupport.checked = true;
   */
 });
-btnClear.addEventListener("click", function() {
-  location.reload();
-});
+
 
 rgRatio.addEventListener("change", function() {
   updateJson();
-  applyPointSortTable();
+  applyTable();
+  sortTable();
   hideSome();
   checkSome();
 });
+
 sltDifficulty.addEventListener("change", hideSome);
 
 cbxRoleTank.addEventListener("change", hideSome);
