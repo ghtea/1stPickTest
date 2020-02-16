@@ -68,24 +68,32 @@ function showAll() {
   let colHeroID
   let colDifficulty
   let colRole
-  let colWinRate
-  let colPlayRate
-  let colBanRate
   
-  dataMap = dataOriginal.slice(idxStart, idxEnd);
+  let colWinRate = currentMap + ' win_rate'
+  let colPlayRate = currentMap + ' popularity'
+  let colBanRate = currentMap + ' ban_rate'
+  
 
   var rows = document.getElementsByClassName("rowTableMain");
 
   /* about Ratio */
   var currentRatio = document.getElementById("rgRatio").value;
-  for (var i = 0; i < numHero; i++) {
-    dataMap[i]["Point"] =
-      (100 - currentRatio) * (dataMap[i]["WinRate"] / 50 / stdWinRate) +
+  
+  
+  
+for (const [key, value] of Object.entries(data)) {
+  value['Point'] =
+    (100 - currentRatio) * (data[colWinRate]/ 50 / stdWinRate) +
       currentRatio *
-        ((((dataMap[i]["PlayRate"] + dataMap[i]["BanRate"]) / 100) * 88) /
+        ((((data[colBanRate] + data[colPlayRate])/ 100) * numHero) /
           16 /
           stdGame);
-  }
+}
+  
+  
+  
+  
+  
   dataSorted = dataMap.sort(compaireFunc("Point"));
 
   if (rows.length > 0) {
