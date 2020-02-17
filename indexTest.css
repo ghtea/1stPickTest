@@ -357,9 +357,7 @@ input.cbxPerHero {
   z-index: 1;
   position: fixed;
   width: 357px;
-  height: 200px;
-  overflow: auto;
-   
+ 
   bottom: 15px;
   opacity: 0.95;
   border-radius: 15px;
@@ -375,15 +373,26 @@ input.cbxPerHero {
 #divBonusLeft, #divBonusRight {
   width: 50%;
 }
-/*
-#divBonusLeft {
-  border-right: 2px solid #000429;
+
+#divBonusLeft p, #divBonusRight p {
+  /* height: 20px !important; doesnt work */
 }
 
-#divBonusRight {
-  border-left: 2px solid #000429;
+#divBonusLeft > div, #divBonusRight > div {
+  overflow: auto;
+  height: 160px;
 }
-*/
+
+#divBonusLeft > div {
+  border-radius: 9px 0 0 9px;
+  background-color: rgba(0, 255, 0, 0.3)
+}
+
+#divBonusRight > div{
+  border-radius: 0 9px 9px 0;
+  background-color: rgba(255, 0, 0, 0.3);
+}
+
 
 .divHeroBox {
   display: flex;
