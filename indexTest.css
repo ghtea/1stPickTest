@@ -351,8 +351,23 @@ input.cbxPerHero {
 
 #divBonus {
   background-color: #eeeeee;
+  z-index: 1;
   position: fixed;
-  height: 200px;
+  width: 375px;
+  height: 225px;
   bottom: 0px;
 
+}
+
+#divBonusLeft, #divBonusRight {
+  display: flex;
+  align-items: center;
+}
+
+#divBonus img {
+  border-radius: 15%;
+  border-width: 0px;
+  margin: 3px
+  width: 36px;
+  height: 36px;
 }
