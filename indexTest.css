@@ -350,16 +350,25 @@ input.cbxPerHero {
 }
 
 #divBonus {
-  background-color: #eeeeee;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  background-image: linear-gradient(-180deg, #20286e, #0f1445);
   z-index: 1;
   position: fixed;
-  width: 375px;
+  width: 365px;
   height: 225px;
   bottom: 0px;
-
+  opacity: 0.98;
+  border-radius: 15px;
 }
 
 #divBonusLeft, #divBonusRight {
+  width: 50%;
+  
+}
+
+.divHeroBox {
   display: flex;
   align-items: center;
 }
@@ -367,7 +376,7 @@ input.cbxPerHero {
 #divBonus img {
   border-radius: 15%;
   border-width: 0px;
-  margin: 3px
+  margin: 3px;
   width: 36px;
   height: 36px;
 }
