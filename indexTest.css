@@ -348,3 +348,11 @@ input.cbxPerHero {
 #btnScroll {
   display: none;
 }
+
+#divBonus {
+  background-color: #eeeeee;
+  position: fixed;
+  height: 200px;
+  bottom: 0px;
+
+}
