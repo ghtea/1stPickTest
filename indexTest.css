@@ -359,7 +359,7 @@ input.cbxPerHero {
   width: 365px;
   height: 225px;
   bottom: 0px;
-  opacity: 0.98;
+  opacity: 0.95;
   border-radius: 15px;
 }
 
@@ -375,7 +375,8 @@ input.cbxPerHero {
 
 #divBonus img {
   border-radius: 15%;
-  border-width: 2px;
+  border-width:1px;  
+  border-style:solid;
   margin: 3px;
   width: 36px;
   height: 36px;
