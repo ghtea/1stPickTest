@@ -8,6 +8,7 @@ var URLback =
 
 const numHero = 88;
 
+var dataList = [];
 var cbxPerHeroList = [];
 var checkedRoles = [];
 var checkedDifficulties = [];
@@ -31,6 +32,7 @@ const numSizeWin = 4.6;
 const numSizePlay = 0.3;
 const stdWinRate = 3.6;
 const stdGame = 19;
+const adjustRank = 13;
 
 var roleInitial;
 var roleColor;
@@ -42,80 +44,28 @@ function compaireFunc(key) {
 }
 
 
-function sortTable() {
-  let table, rows, switching, i, x, y, shouldSwitch;
-  
-  switching = true;
-  /*Make a loop that will continue until
-  no switching has been done:*/
-  while (switching) {
-    //start by saying: no switching is done:
-    switching = false;
-    rows = tbl.rows;
-    /*Loop through all table rows (except the
-    first, which contains table headers):*/
-    for (i = 1; i < (rows.length - 1); i++) {
-      //start by saying there should be no switching:
-      shouldSwitch = false;
-      /*Get the two elements you want to compare,
-      one from current row and one from the next:*/
-      x = rows[i].getElementsByTagName("TD")[0];
-      y = rows[i + 1].getElementsByTagName("TD")[0];
-      //check if the two rows should switch place:
-      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-        //if so, mark as a switch and break the loop:
-        shouldSwitch = true;
-        break;
-      }
-    }
-    if (shouldSwitch) {
-      /*If a switch has been marked, make the switch
-      and mark that a switch has been done:*/
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-    }
-  }
-}
-
-
-
-function showAll() {
+function makeRows() {
   let currentMap = document.getElementById("sltMap").value;
   let currentDifficulty = document.getElementById("sltDifficulty").value;
-
+  let currentRatio = document.getElementById("rgRatio").value;
+  let rows = document.getElementsByClassName("rowTableMain");
   
-  let colWinRate = currentMap + ' win_rate'
-  let colPlayRate = currentMap + ' popularity'
-  let colBanRate = currentMap + ' ban_rate'
-
+  let colWinRate = currentMap + ' win_rate';
+  let colPlayRate = currentMap + ' popularity';
+  let colBanRate = currentMap + ' ban_rate';
   
-  var rows = document.getElementsByClassName("rowTableMain");
-
-  /* about Ratio */
-  var currentRatio = document.getElementById("rgRatio").value;
-  
-  
-  
-  for (const [key, value] of Object.entries(data)) {
-    value['Point'] =
-    (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) +
-      currentRatio *
-        ((((value[colBanRate] + value[colPlayRate])/ 100) * numHero) /
-          16 /
-          stdGame);
-  }
-
-  dataList = Object.values(data)
+  /*
   dataListSorted = dataList.sort(compaireFunc("Point"));
   console.log(dataListSorted)
  
-  
   if (rows.length > 0) {
     for (var i = 0; i < numHero; i++) {
       tbl.deleteRow(1);
     }
   }
-
+  */
+  dataList = Object.values(data)
+  
   for (var i = 0; i < numHero; i++) {
     var row = tbl.insertRow(i + 1);
     var cell1 = row.insertCell(0);
@@ -126,24 +76,25 @@ function showAll() {
 
     row.classList.add("rowTableMain");
     /*row.classList.add("rowShow");*/
-    row.setAttribute("id", "rowHeroID" + dataListSorted[i]["HeroID"]);
-    row.classList.add("rowDifficulty" + dataListSorted[i]["Difficulty"]);
-    row.classList.add("rowRole" + dataListSorted[i]["Role"]);
+    row.setAttribute("id", "rowHeroID" + dataList[i]["HeroID"]);
+    row.classList.add("rowDifficulty" + dataList[i]["Difficulty"]);
+    row.classList.add("rowRole" + dataList[i]["Role"]);
+    row.setAttribute("data-point", dataList[i]["Point"].toString());
 
     cell1.innerHTML =
       "<a target='_blank' rel='noopener noreferrer' href=" +
       URLfront +
-      dataListSorted[i]["URLID"] +
+      dataList[i]["URLID"] +
       URLback +
       "> <img src=" +
       "heroImages/" +
-      dataListSorted[i]["HeroID"] +
+      dataList[i]["HeroID"] +
       ".png" +
       ">" +
       "</a>";
     
     
-    switch (dataListSorted[i]["Role"]) {
+    switch (dataList[i]["Role"]) {
       case "Tank":
         roleInitial = "T";
         break;
@@ -166,23 +117,23 @@ function showAll() {
     
     var divRoleTd = document.createElement("div");
     var rectRole = document.createElement("div");
-    rectRole.setAttribute("class", "role" + dataListSorted[i]["Role"]);
+    rectRole.setAttribute("class", "role" + dataList[i]["Role"]);
     rectRole.innerHTML = roleInitial;
     divRoleTd.appendChild(rectRole);
     cell2.appendChild(divRoleTd);
 
-    for (var k = 0; k < parseInt(dataListSorted[i]["Difficulty"]); k++) {
+    for (var k = 0; k < parseInt(dataList[i]["Difficulty"]); k++) {
       var rectDifficulty = [];
       rectDifficulty[k] = document.createElement("div");
       cell3.appendChild(rectDifficulty[k]);
     }
-    cell3.setAttribute("class", "difficulty" + dataListSorted[i]["Difficulty"]);
+    cell3.setAttribute("class", "difficulty" + dataList[i]["Difficulty"]);
 
     cell4.setAttribute("class", "cellMain");
     var rectMain = document.createElement("div");
-    var rectMainWidth = (dataListSorted[i][colWinRate] - 35) * numSizeWin;
+    var rectMainWidth = (dataList[i][colWinRate] - 35) * numSizeWin;
     var rectMainHeight =
-      (dataListSorted[i][colPlayRate]+ dataListSorted[i][colBanRate]) * numSizePlay;
+      (dataList[i][colPlayRate]+ dataList[i][colBanRate]) * numSizePlay;
 
     rectMain.style =
       "width:" +
@@ -199,8 +150,8 @@ function showAll() {
     cell4.appendChild(rectMain);
 
     var divText = document.createElement("div");
-    var txtGames = (100 / dataListSorted[i][colPlayRate]).toFixed(1);
-    var txtWinRate = dataListSorted[i][colWinRate].toFixed(1);
+    var txtGames = (100 / dataList[i][colPlayRate]).toFixed(1);
+    var txtWinRate = dataList[i][colWinRate].toFixed(1);
     divText.innerHTML = txtWinRate + "%" + "<br> 1 in " + txtGames + "G";
     divText.setAttribute("class", "divRectText");
     cell4.appendChild(divText);
@@ -215,6 +166,109 @@ function showAll() {
     cbxPerHeroList[i].addEventListener("change", checkSome);
   }
 }
+  
+  
+function updatePoint() {
+  let currentMap = document.getElementById("sltMap").value;
+  let currentDifficulty = document.getElementById("sltDifficulty").value;
+  let currentRatio = document.getElementById("rgRatio").value;
+  let currentRatio2 = document.getElementById("rgRatio2").value;
+  
+  let rows = document.getElementsByClassName("rowTableMain");
+  
+  let colWinRate = currentMap + ' win_rate';
+  let colPlayRate = currentMap + ' popularity';
+  let colBanRate = currentMap + ' ban_rate';
+  
+  for (const [key, value] of Object.entries(data)) {
+    value['Point'] =
+      (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) 
+      + currentRatio *
+        ((((value[colBanRate] + value[colPlayRate])/ 100) * numHero) /
+          16 /
+          stdGame) 
+      + (currentRatio2 - 50) / adjustRank * (value['Difficulty'] -3);
+  }
+
+  dataList = Object.values(data)
+}
+ 
+  
+function  applyTable() {
+  let currentMap = document.getElementById("sltMap").value;
+  let currentDifficulty = document.getElementById("sltDifficulty").value;
+  let currentRatio = document.getElementById("rgRatio").value;
+  let rows = document.getElementsByClassName("rowTableMain");
+  
+  let colWinRate = currentMap + ' win_rate';
+  let colPlayRate = currentMap + ' popularity';
+  let colBanRate = currentMap + ' ban_rate';
+  for (var i = 0; i < numHero; i++) {
+    let currentPoint = parseFloat(rows[i].getAttribute("data-point"));
+    for (var k=0; k<numHero; k++) {
+      if(rows[k].getAttribute("id") == "rowHeroID" + dataList[i]["HeroID"]) {
+        
+        rows[k].setAttribute("data-point", dataList[i]["Point"].toString());
+        
+        let rectMain = document.querySelectorAll(".rowTableMain .rectMain")[k]
+        let rectMainWidth = (dataList[i][colWinRate] - 35) * numSizeWin;
+        let rectMainHeight =
+      (dataList[i][colPlayRate]+ dataList[i][colBanRate]) * numSizePlay;
+
+        rectMain.style =
+          "width:" +
+          rectMainWidth +
+          "px;height:" +
+          rectMainHeight +
+          "px; background: linear-gradient(200deg, rgba(105,245,168,1) 0%, rgba(17,226,97,1) 40%, rgba(17,226,97,1) 100%); ";
+        
+        
+        let divText = document.querySelectorAll(".rowTableMain .divRectText")[k]
+        let txtGames = (100 / dataList[i][colPlayRate]).toFixed(1);
+        let txtWinRate = dataList[i][colWinRate].toFixed(1);
+        divText.innerHTML = txtWinRate + "%" + "<br> 1 in " + txtGames + "G";
+      }
+    }
+  }
+}
+
+function sortTable() {
+  let rows = document.getElementsByClassName("rowTableMain");
+  let switching, x, y, shouldSwitch;
+  
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  while (switching) {
+    //start by saying: no switching is done:
+    switching = false;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (var k=0; k<numHero-1; k++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      x = parseFloat(rows[k].getAttribute('data-point'));
+      y = parseFloat(rows[k + 1].getAttribute('data-point'));
+      //check if the two rows should switch place:
+      if (x < y) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[k].parentNode.insertBefore(rows[k + 1], rows[k]);
+      switching = true;
+    }
+  }
+}
+
+
+
 
 function hideSome() {
   let currentMap = document.getElementById("sltMap").value;
@@ -224,9 +278,7 @@ function hideSome() {
   let colPlayRate = currentMap + ' popularity'
   let colBanRate = currentMap + ' ban_rate'
   
-  var rows = document.getElementsByClassName("rowTableMain");
-
-
+  let rows = document.getElementsByClassName("rowTableMain");
 
   var currentRoleCheckedTank = cbxRoleTank.checked;
   var currentRoleCheckedBruiser = cbxRoleBruiser.checked;
@@ -234,21 +286,6 @@ function hideSome() {
   var currentRoleCheckedRanged = cbxRoleRanged.checked;
   var currentRoleCheckedHealer = cbxRoleHealer.checked;
   var currentRoleCheckedSupport = cbxRoleSupport.checked;
-
-  /* about Ratio */
-  var currentRatio = document.getElementById("rgRatio").value;
-  
-  for (const [key, value] of Object.entries(data)) {
-    value['Point'] =
-    (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) +
-      currentRatio *
-        ((((value[colBanRate] + value[colPlayRate])/ 100) * numHero) /
-          16 /
-          stdGame);
-  }
-  dataList = Object.values(data)
-  dataListSorted = dataList.sort(compaireFunc("Point"));
- 
  
   checkedRoles = [];
   if (currentRoleCheckedTank == true) {
@@ -306,8 +343,8 @@ function hideSome() {
 
   /*console.log(rows[3]);*/
   /*just check https://stackoverflow.com/questions/31831651/javascript-filter-array-multiple-conditions*/
-  for (var rowNum = 1; rowNum <= numHero; rowNum++) {
-    var currentRow = document.querySelectorAll("#tableMain tr")[rowNum];
+  for (var k = 0; k < numHero; k++) {
+    var currentRow = rows[k];
     /* https://stackoverflow.com/questions/16312528/check-if-an-array-contains-any-element-of-another-array-in-javascript/29447130 */
     /* 한 배열에 여러 특정 값들이 있는지 확인 */
     if (
@@ -329,13 +366,11 @@ function hideSome() {
 }
 
 function checkSome() {
-  for (var rowNum = 0; rowNum < numHero; rowNum++) {
-    var currentRow = document.querySelectorAll("#tableMain tbody tr")[
-      rowNum + 1
-    ];
-    var currentChecked = document.querySelectorAll(
-      "#tableMain tbody tr .cbxPerHero"
-    )[rowNum].checked;
+
+  let rows = document.getElementsByClassName("rowTableMain");
+  for (var k = 0; k < numHero; k++) {
+    var currentRow = rows[k];
+    var currentChecked = document.querySelectorAll("#tableMain tbody tr .cbxPerHero")[k].checked;
     /*console.log(currentChecked);*/
     if (currentChecked == true) {
       currentRow.classList.add("rowCheck");
@@ -349,13 +384,24 @@ function scrollToTop() {
   window.scrollTo(0, 0);
 }
 
-window.onload = showAll();
+window.onload = function(){
+  makeRows();
+  updatePoint();
+  applyTable();
+  sortTable();
+};
+
+btnClear.addEventListener("click", function() {
+  location.reload();
+});
+
 sltMap.addEventListener("change", function() {
-  showAll();
-  hideSome();
-  checkSome();
+  updatePoint();
+  applyTable();
+  sortTable();
+  
   /*
-  document.getElementById("sltDifficulty").value = 5;
+document.getElementById("sltDifficulty").value = 5;
   cbxRoleTank.checked = true;
   cbxRoleBruiser.checked = true;
   cbxRoleMelee.checked = true;
@@ -364,15 +410,22 @@ sltMap.addEventListener("change", function() {
   cbxRoleSupport.checked = true;
   */
 });
-btnClear.addEventListener("click", function() {
-  location.reload();
-});
+
 
 rgRatio.addEventListener("change", function() {
-  showAll();
-  hideSome();
-  checkSome();
+  updatePoint();
+  applyTable();
+  sortTable();
 });
+
+rgRatio2.addEventListener("change", function() {
+  updatePoint();
+  applyTable();
+  sortTable();
+});
+
+
+
 sltDifficulty.addEventListener("change", hideSome);
 
 cbxRoleTank.addEventListener("change", hideSome);
