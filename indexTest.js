@@ -384,6 +384,30 @@ function scrollToTop() {
   window.scrollTo(0, 0);
 }
 
+/*
+updateMatchup {
+  let matchupHeroButtonID = this.getAttribute("id");
+  let matchipHeriID
+  let arrayBestAllies = data2[matchupHeroID]['bestAllies'];
+  let arrayBestCounters = data2[matchupHeroID]['bestCounters'];
+  let divAllies = document.getElementByID('divAllies');
+  let divCounters = document.getElementByID('divCounters');
+  
+  for ally in arrayBestAllies {
+    let currentSet
+    divAllies.appendchild(currentSet);
+  }
+  
+  for counter in arrayBestCounters {
+    let currentSet
+    divCounters.appendchild(currentSet);
+  }
+}
+*/
+
+
+
+
 window.onload = function(){
   makeRows();
   updatePoint();
