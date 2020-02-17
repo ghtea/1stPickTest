@@ -1,4 +1,4 @@
-@media (max-width: 374px) {
+@media (max-width: 375px) {
   html {
     font-size: 13px;
     zoom: 85%;
@@ -356,31 +356,68 @@ input.cbxPerHero {
   background-image: linear-gradient(-180deg, #20286e, #0f1445);
   z-index: 1;
   position: fixed;
-  width: 365px;
-  height: 225px;
-  bottom: 0px;
+  width: 357px;
+  height: 200px;
+  overflow: auto;
+   
+  bottom: 15px;
   opacity: 0.95;
   border-radius: 15px;
+  border: 4px solid #000429;
+}
+
+#divCloseBonus {
+  position: absolute;
+  right: 10px;
+  top: 10px;
 }
 
 #divBonusLeft, #divBonusRight {
   width: 50%;
-  
 }
+/*
+#divBonusLeft {
+  border-right: 2px solid #000429;
+}
+
+#divBonusRight {
+  border-left: 2px solid #000429;
+}
+*/
 
 .divHeroBox {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap; 
 }
 
-#divBonus img {
+.divHeroSmallSet{
+  position: relative;
+
+}
+
+.divHeroSmallSet p {
+  position: absolute;
+  vertical-align:text-top;
+  top:0px;
+  left: 0px;
+  z-index: 1;
+}
+
+.divHeroSmallSet img {
+  position: relative;
+  top:0px;
+  left:4px;
   border-radius: 15%;
   border-width:1px;  
   border-style:solid;
-  margin: 3px;
+  margin: 8px;
   width: 36px;
   height: 36px;
 }
+
+
 
 .lvlGold {
   border-color: #ffdf00;
