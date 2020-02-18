@@ -354,6 +354,7 @@ input.cbxPerHero {
 }
 
 #divBonus {
+  visibility: hidden;
   display: flex;
   align-items: flex-start;
   padding: 5px;
@@ -369,10 +370,13 @@ input.cbxPerHero {
 }
 
 #divCloseBonus {
-  display: none;
   position: absolute;
   right: 10px;
   top: 10px;
+}
+
+#btnCloseBonus {
+  
 }
 
 #divBonusLeft, #divBonusRight {

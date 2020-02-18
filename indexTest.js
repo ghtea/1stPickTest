@@ -30,12 +30,14 @@ var btnClear = document.getElementById("btnClear");
 var divScroll = document.getElementById("divScroll");
 var btnScroll = document.getElementById("btnScroll");
 
+let divBonus = document.getElementById('divBonus')
+let btnCloseBonus = document.getElementById("btnCloseBonus");
+
 const numSizeWin = 4.6;
 const numSizePlay = 0.3;
 const stdWinRate = 3.6;
 const stdGame = 19;
 const adjustRank = 13;
-
 var roleInitial;
 var roleColor;
 
@@ -382,17 +384,17 @@ function scrollToTop() {
 }
 
 
-updateMatchup {
-  let divBonus = document.getElementByID('divBonus')
-  divBonus.style.display = "block";
+function updateMatchup() {
+
+  divBonus.style.visibility = "visible";
   
-  */
+  /*
   let matchupHeroButtonID = this.getAttribute("id");
   let matchipHeriID
   let arrayBestAllies = data2[matchupHeroID]['bestAllies'];
   let arrayBestCounters = data2[matchupHeroID]['bestCounters'];
-  let divAllies = document.getElementByID('divAllies');
-  let divCounters = document.getElementByID('divCounters');
+  let divAllies = document.getElementById('divAllies');
+  let divCounters = document.getElementById('divCounters');
   
   for ally in arrayBestAllies {
     let currentSet
@@ -461,3 +463,4 @@ cbxRoleHealer.addEventListener("change", hideSome);
 cbxRoleSupport.addEventListener("change", hideSome);
 
 btnScroll.addEventListener("click", scrollToTop);
+btnCloseBonus.addEventListener("click", function(){divBonus.style.visibility="hidden";});
