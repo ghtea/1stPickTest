@@ -2,9 +2,9 @@
 var test = dataOriginal[1]['BanRate']; */
 
 /* almost constant variables, initialization, functions*/
-var URLfront = "https://www.heroesprofile.com/Global/Matchups/?hero=";
-var URLback =
-  "&timeframe_type=minor&timeframe=2.49.2.77981,2.49.1.77692,2.49.1.77662&game_type=sl";
+
+let data = readData('dfHeroMapBasic.json');
+console.log(data);
 
 const numHero = 88;
 
@@ -387,12 +387,12 @@ function scrollToTop() {
 function updateMatchup() {
 
   divBonus.style.visibility = "visible";
-  
   /*
-  let matchupHeroButtonID = this.getAttribute("id");
-  let matchipHeriID
-  let arrayBestAllies = data2[matchupHeroID]['bestAllies'];
-  let arrayBestCounters = data2[matchupHeroID]['bestCounters'];
+  let matchupHeroButtonId = this.getAttribute("id");
+  let matchupHeroId = matchupHeroButtonId.replace("^btn", "");
+  let arrayBestAllies = data2[matchupHeroId]['bestAllies'];
+  let arrayBestCounters = data2[matchupHeroId]['bestCounters'];
+  
   let divAllies = document.getElementById('divAllies');
   let divCounters = document.getElementById('divCounters');
   
@@ -405,7 +405,7 @@ function updateMatchup() {
     let currentSet
     divCounters.appendchild(currentSet);
   }
-  */
+   */
 }
 
 
