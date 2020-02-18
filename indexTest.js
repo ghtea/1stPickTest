@@ -9,6 +9,8 @@ var URLback =
 const numHero = 88;
 
 var dataList = [];
+
+let btnHeroList = [];
 var cbxPerHeroList = [];
 var checkedRoles = [];
 var checkedDifficulties = [];
@@ -80,18 +82,11 @@ function makeRows() {
     row.classList.add("rowDifficulty" + dataList[i]["Difficulty"]);
     row.classList.add("rowRole" + dataList[i]["Role"]);
     row.setAttribute("data-point", dataList[i]["Point"].toString());
-
+      
     cell1.innerHTML =
-      "<a target='_blank' rel='noopener noreferrer' href=" +
-      URLfront +
-      dataList[i]["URLID"] +
-      URLback +
-      "> <img src=" +
-      "heroImages/" +
-      dataList[i]["HeroID"] +
-      ".png" +
-      ">" +
-      "</a>";
+      "<button class='btnHero' id='btn" +
+      dataList[i]["HeroID"] + "'> <img src='" + "heroImages/" + dataList[i]["HeroID"] +
+      ".png'> </button>";
     
     
     switch (dataList[i]["Role"]) {
@@ -162,8 +157,10 @@ function makeRows() {
   }
 
   cbxPerHeroList = document.getElementsByClassName("cbxPerHero");
+  btnHeroList = document.getElementsByClassName("btnHero")
   for (var i = 0; i < numHero; i++) {
     cbxPerHeroList[i].addEventListener("change", checkSome);
+    btnHeroList[i].addEventListener("click", updateMatchup);
   }
 }
   
@@ -384,8 +381,12 @@ function scrollToTop() {
   window.scrollTo(0, 0);
 }
 
-/*
+
 updateMatchup {
+  let divBonus = document.getElementByID('divBonus')
+  divBonus.style.display = "block";
+  
+  */
   let matchupHeroButtonID = this.getAttribute("id");
   let matchipHeriID
   let arrayBestAllies = data2[matchupHeroID]['bestAllies'];
@@ -402,8 +403,8 @@ updateMatchup {
     let currentSet
     divCounters.appendchild(currentSet);
   }
+  */
 }
-*/
 
 
 

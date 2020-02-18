@@ -214,10 +214,14 @@ h1 {
   border: none;
 }
 
-td a img {
+.btnHero {
+  border: none;
+}
+
+.btnHero img {
   border-radius: 15%;
   border-width: 0px;
-  padding: 3px;
+  padding: 1px;
   width: 50px;
   height: 50px;
   /*position: absolute; top:0; left:50px; z-index: 10;";*/
@@ -365,6 +369,7 @@ input.cbxPerHero {
 }
 
 #divCloseBonus {
+  display: none;
   position: absolute;
   right: 10px;
   top: 10px;
