@@ -3,21 +3,13 @@ var test = dataOriginal[1]['BanRate']; */
 
 /* almost constant variables, initialization, functions*/
 
-let data
 
-var requestURL = 'dfHeroMapBasic.json';
-var request = new XMLHttpRequest();
-request.open('GET', requestURL);
-request.responseType = 'json';
-request.send();
+var data= objHeroMapBasic;
 
-request.onload = function() {
-  data = request.response;
-}
-
-const numHero = 88;
 
 var dataList = [];
+const numHero = 88;
+
 
 let btnHeroList = [];
 var cbxPerHeroList = [];
