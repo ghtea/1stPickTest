@@ -397,22 +397,28 @@ function updateMatchup() {
   
   let matchupHeroBtnId = this.getAttribute("id");
   let matchupHeroId = matchupHeroBtnId.replace("^btn", "");
-  let arrayBestAllies = data2[matchupHeroId]['bestAllies'];
-  let arrayBestCounters = data2[matchupHeroId]['bestCounters'];
+  
+  let BestAlliesGold = dataHH[matchupHeroId]['BestAlliesGold'].split(", ");
+  let BestAlliesSilver = dataHH[matchupHeroId]['BestAlliesSilver'].split(", ");
+  let BestAlliesBronze = dataHH[matchupHeroId]['BestAlliesBronze'].split(", ");
+  let BestCountersGold= dataHH[matchupHeroId]['BestCountersGold'].split(", ");
+  let BestCountersSilver= dataHH[matchupHeroId]['BestCountersSilver'].split(", ");
+  let BestCountersBronze = dataHH[matchupHeroId]['BestCountersBronze'].split(", ");
+  let sixBigArrays = [BestAlliesGold, BestAlliesSilver, BestAlliesBronze, BestCountersGold, BestCountersSilver, BestCountersBronze];
+  
   
   let divAllies = document.getElementById('divAllies');
   let divCounters = document.getElementById('divCounters');
   
-  for ally in arrayBestAllies {
-    let currentSet
-    divAllies.appendchild(currentSet);
+  for (const array in sixBigArrays) {
+    for (const ally in array) {
+      let currentSet = document.createElement("div");
+      currentSet.classList.add("divHeroSmallSet");
+      currentSet.innerHTML = "<p>🥇</p><img class='lvlGold' src='heroImages/"+ matchupHeroId + ".png'>";
+      divAllies.appendchild(currentSet);
+    }
   }
   
-  for counter in arrayBestCounters {
-    let currentSet
-    divCounters.appendchild(currentSet);
-  }
-   
 }
 
 
