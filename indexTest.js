@@ -395,15 +395,15 @@ function updateMatchup() {
 
   divBonus.style.visibility = "visible";
   
-  let matchupHeroBtnId = this.getAttribute("id");
-  let matchupHeroId = matchupHeroBtnId.replace(/^btn/, "");
+  let mainHeroBtnId = this.getAttribute("id");
+  let mainHeroId = mainHeroBtnId.replace(/^btn/, "");
 
-  let BestAlliesGold = dataHH[matchupHeroId]['BestAlliesGold'].split(", ");
-  let BestAlliesSilver = dataHH[matchupHeroId]['BestAlliesSilver'].split(", ");
-  let BestAlliesBronze = dataHH[matchupHeroId]['BestAlliesBronze'].split(", ");
-  let BestCountersGold= dataHH[matchupHeroId]['BestCountersGold'].split(", ");
-  let BestCountersSilver= dataHH[matchupHeroId]['BestCountersSilver'].split(", ");
-  let BestCountersBronze = dataHH[matchupHeroId]['BestCountersBronze'].split(", ");
+  let BestAlliesGold = dataHH[mainHeroId]['BestAlliesGold'].split(", ");
+  let BestAlliesSilver = dataHH[mainHeroId]['BestAlliesSilver'].split(", ");
+  let BestAlliesBronze = dataHH[mainHeroId]['BestAlliesBronze'].split(", ");
+  let BestCountersGold= dataHH[mainHeroId]['BestCountersGold'].split(", ");
+  let BestCountersSilver= dataHH[mainHeroId]['BestCountersSilver'].split(", ");
+  let BestCountersBronze = dataHH[mainHeroId]['BestCountersBronze'].split(", ");
   let sixBigArrays = [BestAlliesGold, BestAlliesSilver, BestAlliesBronze, BestCountersGold, BestCountersSilver, BestCountersBronze];
   console.log(BestAlliesGold);
   console.log(BestAlliesSilver);
@@ -412,8 +412,12 @@ function updateMatchup() {
   console.log(BestCountersSilver);
   console.log(BestCountersBronze);
   
+  let divMainHero = document.getElementById('divMainHero');
   let divAllies = document.getElementById('divAllies');
   let divCounters = document.getElementById('divCounters');
+  divMainHero = data[mainHeroId]['HeroName'];
+  divAllies.innerHTML = "";
+  divCounters.innerHTML = "";
   
   for (const j in BestAlliesGold ) {
     let currentSet = document.createElement("div");
