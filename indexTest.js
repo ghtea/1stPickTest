@@ -415,7 +415,7 @@ function updateMatchup() {
   let divMainHero = document.getElementById('divMainHero');
   let divAllies = document.getElementById('divAllies');
   let divCounters = document.getElementById('divCounters');
-  divMainHero = data[mainHeroId]['HeroName'];
+  divMainHero.innerHTML= data[mainHeroId]['HeroName'];
   divAllies.innerHTML = "";
   divCounters.innerHTML = "";
   
