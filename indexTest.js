@@ -3,7 +3,18 @@ var test = dataOriginal[1]['BanRate']; */
 
 /* almost constant variables, initialization, functions*/
 
-import * as data from 'dfHeroMapBasic.json';
+let data
+
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    data = JSON.parse(this.responseText);
+    
+  }
+};
+xmlhttp.open("GET", "dfHeroMapBasic.txt", true);
+xmlhttp.send();
+
 
 const numHero = 88;
 
