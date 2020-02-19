@@ -406,6 +406,11 @@ function updateMatchup() {
   let BestCountersBronze = dataHH[matchupHeroId]['BestCountersBronze'].split(", ");
   let sixBigArrays = [BestAlliesGold, BestAlliesSilver, BestAlliesBronze, BestCountersGold, BestCountersSilver, BestCountersBronze];
   console.log(BestAlliesGold);
+  console.log(BestAlliesSilver);
+  console.log(BestAlliesBronze);
+  console.log(BestCountersGold);
+  console.log(BestCountersSilver);
+  console.log(BestCountersBronze);
   
   let divAllies = document.getElementById('divAllies');
   let divCounters = document.getElementById('divCounters');
