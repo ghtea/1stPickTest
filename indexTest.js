@@ -5,9 +5,15 @@ var test = dataOriginal[1]['BanRate']; */
 
 
 var data= objHeroMapBasic;
+var dataHH = objHeroHero;
 
 
 var dataList = [];
+var dataHHList = [];
+
+/* make obj as array */
+dataHHList = Object.values(dataHH);
+
 const numHero = 88;
 
 
