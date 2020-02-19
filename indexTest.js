@@ -394,9 +394,9 @@ function scrollToTop() {
 function updateMatchup() {
 
   divBonus.style.visibility = "visible";
-  /*
-  let matchupHeroButtonId = this.getAttribute("id");
-  let matchupHeroId = matchupHeroButtonId.replace("^btn", "");
+  
+  let matchupHeroBtnId = this.getAttribute("id");
+  let matchupHeroId = matchupHeroBtnId.replace("^btn", "");
   let arrayBestAllies = data2[matchupHeroId]['bestAllies'];
   let arrayBestCounters = data2[matchupHeroId]['bestCounters'];
   
@@ -412,7 +412,7 @@ function updateMatchup() {
     let currentSet
     divCounters.appendchild(currentSet);
   }
-   */
+   
 }
 
 
