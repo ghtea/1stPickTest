@@ -3,8 +3,7 @@ var test = dataOriginal[1]['BanRate']; */
 
 /* almost constant variables, initialization, functions*/
 
-let data = readData('dfHeroMapBasic.json');
-console.log(data);
+import * as data from 'dfHeroMapBasic.json';
 
 const numHero = 88;
 
