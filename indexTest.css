@@ -440,9 +440,13 @@ input.cbxPerHero {
 
 
 .lvlGold {
-  border-color: #ffdf00;
+  border-color: #fee101;
 }
 
 .lvlSilver {
-  border-color: #dddddd;
+  border-color: #d7d7d7;
+}
+
+.lvlBronze {
+  border-color: #a77044;
 }
