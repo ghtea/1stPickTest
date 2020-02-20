@@ -371,7 +371,9 @@ input.cbxPerHero {
 
 
 #divMainHero{
-  height: 20px;
+  position: absolute;
+  left: 15px;
+  height: 35px;
   font-size: 1.1rem;
 }
 
