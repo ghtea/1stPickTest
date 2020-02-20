@@ -420,36 +420,42 @@ function updateMatchup() {
   divCounters.innerHTML = "";
   
   for (const j in BestAlliesGold ) {
+    if (BestAlliesGold.length==0) {break;};
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
     currentSet.innerHTML = "<p>🥇</p><img class='lvlGold' src='heroImages/"+ BestAlliesGold[j] + ".png'>";
     divAllies.appendChild(currentSet);
   }
   for (const j in BestAlliesSilver ) {
+    if (BestAlliesSilver.length==0) {break;};
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
     currentSet.innerHTML = "<p>🥈</p><img class='lvlSilver' src='heroImages/"+ BestAlliesSilver[j] + ".png'>";
     divAllies.appendChild(currentSet);
   }
   for (const j in BestAlliesBronze ) {
+    if (BestAlliesBronze.length==0) {break;};
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
     currentSet.innerHTML = "<p>🥉</p><img class='lvlBronze' src='heroImages/"+ BestAlliesBronze[j] + ".png'>";
     divAllies.appendChild(currentSet);
   }
   for (const j in BestCountersGold ) {
+    if (BestCountersGold.length==0) {break;};
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
     currentSet.innerHTML = "<p>🥇</p><img class='lvlGold' src='heroImages/"+ BestCountersGold[j] + ".png'>";
     divCounters.appendChild(currentSet);
   }
   for (const j in BestCountersSilver ) {
+    if (BestCountersSilver.length==0) {break;};
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
     currentSet.innerHTML = "<p>🥈</p><img class='lvlSilver' src='heroImages/"+ BestCountersSilver[j] + ".png'>";
     divCounters.appendChild(currentSet);
     }
-    for (const j in BestCountersBronze ) {
+  for (const j in BestCountersBronze ) {
+    if (BestCountersBronze.length==0) {break;};
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
     currentSet.innerHTML = "<p>🥉</p><img class='lvlBronze' src='heroImages/"+ BestCountersBronze[j] + ".png'>";
