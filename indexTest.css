@@ -372,15 +372,15 @@ input.cbxPerHero {
 
 #divMainHero{
   position: absolute;
-  left: 15px;
-  height: 35px;
-  font-size: 1.1rem;
+  top: 7px;
+  left: 17px;
+  font-size: 1.2rem;
 }
 
 #divCloseBonus {
   position: absolute;
   right: 0px;
-  top: 5px;
+  top: 7px;
 }
 
 #btnCloseBonus {
@@ -395,11 +395,13 @@ input.cbxPerHero {
 
 #divBonusLeft p, #divBonusRight p {
   /* height: 20px !important; doesnt work */
+  height:17px;
+  padding-top:15px;
 }
 
 #divBonusLeft > div, #divBonusRight > div {
   overflow: auto;
-  height: 160px;
+  height: 170px;
 }
 
 #divBonusLeft > div {
@@ -440,7 +442,7 @@ input.cbxPerHero {
   border-radius: 15%;
   border-width:1px;  
   border-style:solid;
-  margin: 8px;
+  margin: 7px;
   width: 36px;
   height: 36px;
 }
