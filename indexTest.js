@@ -15,6 +15,13 @@ var dataHHList = [];
 dataHHList = Object.values(dataHH);
 
 const numHero = 88;
+const meanWinRate = 49.47;
+const stdWinRate = 4.27;
+const meanGameRate = 24.80;
+const stdGameRate = 31.55
+const meanDiff = 2.97
+const stdDiff = 0.93
+const adjustDiff= 2;
 
 
 let btnHeroList = [];
@@ -42,9 +49,7 @@ let btnCloseBonus = document.getElementById("btnCloseBonus");
 
 const numSizeWin = 4.6;
 const numSizePlay = 0.3;
-const stdWinRate = 3.6;
-const stdGame = 19;
-const adjustRank = 13;
+
 var roleInitial;
 var roleColor;
 
@@ -188,6 +193,19 @@ function updatePoint() {
   
   for (const [key, value] of Object.entries(data)) {
     value['Point'] =
+      (100 - currentRatio) * ((value[colWinRate]- meanWinRate)/ stdWinRate) 
+      + currentRatio *
+        ((value[colBanRate] + value[colPlayRate] - meanGameRate) / stdGameRate)
+      + (currentRatio2 - 50) * adjustDiff * (value['Difficulty'] -meanDiff)/stdDiff;
+  }
+
+  dataList = Object.values(data)
+}
+ 
+ 
+ /*
+ for (const [key, value] of Object.entries(data)) {
+    value['Point'] =
       (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) 
       + currentRatio *
         ((((value[colBanRate] + value[colPlayRate])/ 100) * numHero) /
@@ -195,10 +213,11 @@ function updatePoint() {
           stdGame) 
       + (currentRatio2 - 50) / adjustRank * (value['Difficulty'] -3);
   }
-
   dataList = Object.values(data)
 }
  
+ 
+ */
   
 function  applyTable() {
   let currentMap = document.getElementById("sltMap").value;
@@ -419,48 +438,48 @@ function updateMatchup() {
   divAllies.innerHTML = "";
   divCounters.innerHTML = "";
   
+  if (BestAlliesGold[0]) {
   for (const j in BestAlliesGold ) {
-    if (BestAlliesGold.length==0) {break;};
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
     currentSet.innerHTML = "<p>🥇</p><img class='lvlGold' src='heroImages/"+ BestAlliesGold[j] + ".png'>";
     divAllies.appendChild(currentSet);
-  }
+  }}
+  if (BestAlliesSilver[0]) {
   for (const j in BestAlliesSilver ) {
-    if (BestAlliesSilver.length==0) {break;};
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
     currentSet.innerHTML = "<p>🥈</p><img class='lvlSilver' src='heroImages/"+ BestAlliesSilver[j] + ".png'>";
     divAllies.appendChild(currentSet);
-  }
+  }}
+  if (BestAlliesBronze[0]) {
   for (const j in BestAlliesBronze ) {
-    if (BestAlliesBronze.length==0) {break;};
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
     currentSet.innerHTML = "<p>🥉</p><img class='lvlBronze' src='heroImages/"+ BestAlliesBronze[j] + ".png'>";
     divAllies.appendChild(currentSet);
-  }
+  }}
+  if (BestCountersGold[0]) {
   for (const j in BestCountersGold ) {
-    if (BestCountersGold.length==0) {break;};
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
     currentSet.innerHTML = "<p>🥇</p><img class='lvlGold' src='heroImages/"+ BestCountersGold[j] + ".png'>";
     divCounters.appendChild(currentSet);
-  }
+  }}
+  if (BestCountersSilver[0]) {
   for (const j in BestCountersSilver ) {
-    if (BestCountersSilver.length==0) {break;};
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
     currentSet.innerHTML = "<p>🥈</p><img class='lvlSilver' src='heroImages/"+ BestCountersSilver[j] + ".png'>";
     divCounters.appendChild(currentSet);
-    }
+    }}
+  if (BestCountersBronze[0]) {
   for (const j in BestCountersBronze ) {
-    if (BestCountersBronze.length==0) {break;};
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
     currentSet.innerHTML = "<p>🥉</p><img class='lvlBronze' src='heroImages/"+ BestCountersBronze[j] + ".png'>";
     divCounters.appendChild(currentSet);
-    }
+    }}
 }
 
 
