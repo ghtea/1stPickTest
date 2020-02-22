@@ -366,15 +366,19 @@ input.cbxPerHero {
   padding: 5px;
   background-image: linear-gradient(-180deg, #20286e, #0f1445);
   z-index: 1;
-  position: fixed;
   width: 357px;
- 
+  position: fixed;
   bottom: 15px;
   opacity: 0.95;
   border-radius: 15px;
   border: 4px solid #000429;
 }
 
+@media (min-height: 1000px) {
+  #divBonus {
+    top: 750px;
+  }
+}
 
 #divMainHero{
   position: absolute;
