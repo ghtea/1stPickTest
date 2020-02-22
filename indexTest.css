@@ -136,15 +136,7 @@ h1 {
 #divRatio > input,
 #divRatio2 > p,
 #divRatio2 > input,
-#divContact > p,
-#divContact > a {
-  position: static;
-  display: inline;
-}
 
-#divContact > a {
-  color: white;
-}
 
 /* table */
 #tableMain {
@@ -322,12 +314,26 @@ input.cbxPerHero {
   transform: scale(1.3);
 }
 
-#dataDate {
+#dataFrom {
   background-color: #0f1445;
   border-radius: 0 0 15px 15px;
   margin-top: 0px;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+#dataFrom a {
+  color: white;
+}
+
+#divContact > p,
+#divContact > a {
+  position: static;
+  display: inline;
+}
+
+#divContact > a {
+  color: white;
 }
 
 #divScroll {
