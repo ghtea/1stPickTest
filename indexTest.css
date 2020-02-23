@@ -42,7 +42,7 @@ h1 {
 }
 
 #divInput {
-  background-image: linear-gradient(-180deg, #20286e, #0f1445);
+  background-image: linear-gradient(-180deg, #33277C, #0F1B6D);
   border-radius: 15px 15px 0 0;
   padding-top: 10px;
 }
@@ -124,7 +124,7 @@ h1 {
   width: 50px;
   height: 30px;
   font-size: 1rem;
-  background-color: #000429;
+  background-color: #0F1B6D;
   border-radius: 4px;
   display: table-cell;
   vertical-align: middle;
@@ -173,7 +173,7 @@ h1 {
 
 #tableMain tr:nth-child(n + 2) {
   height: 56px;
-  border-bottom: 3px solid #20286e !important ;
+  border-bottom: 3px solid #0F1B6D !important ;
 }
 
 .rowHide {
@@ -197,7 +197,7 @@ h1 {
 }
 
 #tableMain th {
-  background-color: #0f1445;
+  background-color: #0F1B6D;
   color: white;
   height: 45px;
   font-size: 0.9rem;
@@ -317,7 +317,7 @@ input.cbxPerHero {
 }
 
 #dataFrom {
-  background-color: #0f1445;
+  background-color: #0F1B6D;
   border-radius: 0 0 15px 15px;
   margin-top: 0px;
   padding-top: 10px;
@@ -366,7 +366,7 @@ input.cbxPerHero {
   display: flex;
   align-items: flex-start;
   padding: 5px;
-  background-image: linear-gradient(-180deg, #20286e, #0f1445);
+  background-image: linear-gradient(-180deg, #33277C, #0F1B6D);
   z-index: 1;
   width: 357px;
   position: fixed;
