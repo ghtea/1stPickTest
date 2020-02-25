@@ -67,7 +67,7 @@ function makeRows() {
   let rows = document.getElementsByClassName("rowTableMain");
   
   let colWinRate = currentMap + ' win_rate';
-  let colPlayRate = currentMap + ' popularity';
+  let colGameRate = currentMap + ' popularity';
   let colBanRate = currentMap + ' ban_rate';
   
   /*
@@ -142,7 +142,7 @@ function makeRows() {
     var rectMain = document.createElement("div");
     var rectMainWidth = (dataList[i][colWinRate] - 35) * numSizeWin;
     var rectMainHeight =
-      (dataList[i][colPlayRate]+ dataList[i][colBanRate]) * numSizePlay;
+      dataList[i][colGameRate] * numSizePlay;
 
     rectMain.style =
       "width:" +
@@ -159,7 +159,7 @@ function makeRows() {
     cell4.appendChild(rectMain);
 
     var divText = document.createElement("div");
-    var txtGames = (100 / dataList[i][colPlayRate]).toFixed(1);
+    var txtGames = (100 / dataList[i][colGameRate]).toFixed(1);
     var txtWinRate = dataList[i][colWinRate].toFixed(1);
     divText.innerHTML = txtWinRate + "%" + "<br> 1 in " + txtGames + "G";
     divText.setAttribute("class", "divRectText");
@@ -188,36 +188,24 @@ function updatePoint() {
   let rows = document.getElementsByClassName("rowTableMain");
   
   let colWinRate = currentMap + ' win_rate';
-  let colPlayRate = currentMap + ' popularity';
+  let colGameRate = currentMap + ' popularity';
   let colBanRate = currentMap + ' ban_rate';
   
   for (const [key, value] of Object.entries(data)) {
     value['Point'] =
       (100 - currentRatio) * ((value[colWinRate]- meanWinRate)/ stdWinRate) 
       + currentRatio *
-        ((value[colBanRate] + value[colPlayRate] - meanGameRate) / stdGameRate)
+        ((value[colBanRate] + value[colGameRate] - meanGameRate) / stdGameRate)
       + (currentRatio2 - 50) * adjustDiff * (value['Difficulty'] -meanDiff)/stdDiff;
   }
 
   dataList = Object.values(data)
 }
  
- 
- /*
- for (const [key, value] of Object.entries(data)) {
-    value['Point'] =
-      (100 - currentRatio) * (value[colWinRate]/ 50 / stdWinRate) 
-      + currentRatio *
-        ((((value[colBanRate] + value[colPlayRate])/ 100) * numHero) /
-          16 /
-          stdGame) 
-      + (currentRatio2 - 50) / adjustRank * (value['Difficulty'] -3);
-  }
-  dataList = Object.values(data)
-}
+
  
  
- */
+
   
 function  applyTable() {
   let currentMap = document.getElementById("sltMap").value;
@@ -226,7 +214,7 @@ function  applyTable() {
   let rows = document.getElementsByClassName("rowTableMain");
   
   let colWinRate = currentMap + ' win_rate';
-  let colPlayRate = currentMap + ' popularity';
+  let colGameRate = currentMap + ' popularity';
   let colBanRate = currentMap + ' ban_rate';
   for (var i = 0; i < numHero; i++) {
     let currentPoint = parseFloat(rows[i].getAttribute("data-point"));
@@ -238,7 +226,7 @@ function  applyTable() {
         let rectMain = document.querySelectorAll(".rowTableMain .rectMain")[k]
         let rectMainWidth = (dataList[i][colWinRate] - 35) * numSizeWin;
         let rectMainHeight =
-      (dataList[i][colPlayRate]+ dataList[i][colBanRate]) * numSizePlay;
+      dataList[i][colGameRate] * numSizePlay;
 
         rectMain.style =
           "width:" +
@@ -249,7 +237,7 @@ function  applyTable() {
         
         
         let divText = document.querySelectorAll(".rowTableMain .divRectText")[k]
-        let txtGames = (100 / dataList[i][colPlayRate]).toFixed(1);
+        let txtGames = (100 / dataList[i][colGameRate]).toFixed(1);
         let txtWinRate = dataList[i][colWinRate].toFixed(1);
         divText.innerHTML = txtWinRate + "%" + "<br> 1 in " + txtGames + "G";
       }
@@ -300,7 +288,7 @@ function hideSome() {
   let currentDifficulty = document.getElementById("sltDifficulty").value;
   
   let colWinRate = currentMap + ' win_rate'
-  let colPlayRate = currentMap + ' popularity'
+  let colGameRate = currentMap + ' popularity'
   let colBanRate = currentMap + ' ban_rate'
   
   let rows = document.getElementsByClassName("rowTableMain");
