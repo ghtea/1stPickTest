@@ -21,7 +21,7 @@ const meanGameRate = 24.80;
 const stdGameRate = 31.55
 const meanDiff = 2.97
 const stdDiff = 0.93
-const adjustDiff= 2;
+const adjustDiff= 1;
 
 
 let btnHeroList = [];
@@ -48,7 +48,7 @@ let divBonus = document.getElementById('divBonus')
 let btnCloseBonus = document.getElementById("btnCloseBonus");
 
 const numSizeWin = 4.6;
-const numSizePlay = 0.3;
+const numSizePlay = 0.5;
 
 var roleInitial;
 var roleColor;
