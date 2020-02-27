@@ -23,6 +23,10 @@ body {
   margin-left: auto !important;
 }
 
+a {
+  color: white;
+}
+
 #nonTable {
   display: block;
   width: 375px;
@@ -34,11 +38,15 @@ body {
 /*@media (min-width:1400px){bodywidth: 1400px ;}}*/
 
 #divh1 {
-  height: 40px;
+  height: 30px;
 }
 
 h1 {
   font-size: 1.4rem;
+}
+
+#divMessage {
+  height: 30px;
 }
 
 #divInput {

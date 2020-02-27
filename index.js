@@ -53,6 +53,15 @@ const numSizePlay = 0.5;
 var roleInitial;
 var roleColor;
 
+
+function changeMessage() {
+  let pMessage = document.getElementById("pMessage");
+  
+  let messages = ['updated: 2020. 2. 26.', 'please use <a href="https://api.heroesprofile.com/upload"> Heroes Profile Uploader </a>', "'Add to Home Screen' on your iPhone Safari"]
+  
+  pMessage.innerHTML = messages[Math.floor(Math.random() * messages.length)];
+}
+
 function compaireFunc(key) {
   return function(a, b) {
     return b[key] - a[key];
@@ -477,6 +486,8 @@ window.onload = function(){
   updatePoint();
   applyTable();
   sortTable();
+  changeMessage();
+  setInterval(changeMessage, 10000);
 };
 
 btnClear.addEventListener("click", function() {
