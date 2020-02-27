@@ -94,7 +94,7 @@ h1 {
 }
 
 /* Number of Games,  Bronze Games, Mastee Games */
-#divRatio > :nth-child(3), #divRatio2 > :nth-child(1), #divRatio2 > :nth-child(3) {
+.rgTextSmall {
   font-size: 0.9rem;
 }
 
