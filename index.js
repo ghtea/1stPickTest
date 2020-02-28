@@ -54,7 +54,6 @@ var roleInitial;
 var roleColor;
 
 var iMessage = 0;
-
 function changeMessage() {
   let pMessage = document.getElementById("pMessage");
   
@@ -66,6 +65,18 @@ function changeMessage() {
     iMessage = 0;
   } else {iMessage+=1;};
   
+}
+var iDataInfo = 0;
+function changeDataInfo() {
+  let pDataInfo = document.getElementById("pDataInfo");
+  
+  let dataInfos = ["main data<br>v2.49.2.77981 (heroes x maps)<br> v2.49 (heroes x heroes)<br> source: <a href='https://api.heroesprofile.com'>Heroes Profile API</a>", "hero difficulty data<br>by Lucifer474 (<a href='https://1drv.ms/x/s!Ar0HIinrMYwPhJNzYBCXCPwRtxibQA?e=IZnVHV'> his work </a>)"];
+  
+  pDataInfo.innerHTML = dataInfos[iDataInfo];
+  
+  if (iDataInfo == dataInfos.length -1) {
+    iDataInfo = 0;
+  } else {iDataInfo+=1;};
 }
 
 function compaireFunc(key) {
@@ -494,6 +505,8 @@ window.onload = function(){
   sortTable();
   changeMessage();
   setInterval(changeMessage, 10000);
+  changeDataInfo();
+  setInterval(changeDataInfo, 10000);
 };
 
 btnClear.addEventListener("click", function() {
