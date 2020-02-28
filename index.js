@@ -18,9 +18,9 @@ const numHero = 88;
 const meanWinRate = 49.47;
 const stdWinRate = 4.27;
 const meanGameRate = 24.80;
-const stdGameRate = 31.55
-const meanDiff = 2.97
-const stdDiff = 0.93
+const stdGameRate = 31.55;
+const meanDiff = 0;
+const stdDiff = 1;
 const adjustDiff= 1;
 
 
@@ -146,12 +146,12 @@ function makeRows() {
     divRoleTd.appendChild(rectRole);
     cell2.appendChild(divRoleTd);
 
-    for (var k = 0; k < parseInt(dataList[i]["Difficulty"]); k++) {
+    for (var k = 0; k < parseInt(dataList[i]["DifficultyStage"]); k++) {
       var rectDifficulty = [];
       rectDifficulty[k] = document.createElement("div");
       cell3.appendChild(rectDifficulty[k]);
     }
-    cell3.setAttribute("class", "difficulty" + dataList[i]["Difficulty"]);
+    cell3.setAttribute("class", "difficulty" + dataList[i]["DifficultyStage"]);
 
     cell4.setAttribute("class", "cellMain");
     var rectMain = document.createElement("div");
