@@ -108,7 +108,7 @@ function makeRows() {
     row.classList.add("rowTableMain");
     /*row.classList.add("rowShow");*/
     row.setAttribute("id", "rowHeroID" + dataList[i]["HeroID"]);
-    row.classList.add("rowDifficulty" + dataList[i]["Difficulty"]);
+    row.classList.add("rowDifficulty" + dataList[i]["DifficultyStage"]);
     row.classList.add("rowRole" + dataList[i]["Role"]);
     row.setAttribute("data-point", dataList[i]["Point"].toString());
       
