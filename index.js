@@ -456,42 +456,42 @@ function updateMatchup() {
   for (const j in BestAlliesGold ) {
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
-    currentSet.innerHTML = "<p>🥇</p><img class='lvlGold' src='heroImages/"+ BestAlliesGold[j] + ".png'>";
+    currentSet.innerHTML = "<p>&#129351</p><img class='lvlGold' src='heroImages/"+ BestAlliesGold[j] + ".png'>";
     divAllies.appendChild(currentSet);
   }}
   if (BestAlliesSilver[0]) {
   for (const j in BestAlliesSilver ) {
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
-    currentSet.innerHTML = "<p>🥈</p><img class='lvlSilver' src='heroImages/"+ BestAlliesSilver[j] + ".png'>";
+    currentSet.innerHTML = "<p>&#129352</p><img class='lvlSilver' src='heroImages/"+ BestAlliesSilver[j] + ".png'>";
     divAllies.appendChild(currentSet);
   }}
   if (BestAlliesBronze[0]) {
   for (const j in BestAlliesBronze ) {
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
-    currentSet.innerHTML = "<p>🥉</p><img class='lvlBronze' src='heroImages/"+ BestAlliesBronze[j] + ".png'>";
+    currentSet.innerHTML = "<p>#129353</p><img class='lvlBronze' src='heroImages/"+ BestAlliesBronze[j] + ".png'>";
     divAllies.appendChild(currentSet);
   }}
   if (BestCountersGold[0]) {
   for (const j in BestCountersGold ) {
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
-    currentSet.innerHTML = "<p>🥇</p><img class='lvlGold' src='heroImages/"+ BestCountersGold[j] + ".png'>";
+    currentSet.innerHTML = "<p>&#129351</p><img class='lvlGold' src='heroImages/"+ BestCountersGold[j] + ".png'>";
     divCounters.appendChild(currentSet);
   }}
   if (BestCountersSilver[0]) {
   for (const j in BestCountersSilver ) {
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
-    currentSet.innerHTML = "<p>🥈</p><img class='lvlSilver' src='heroImages/"+ BestCountersSilver[j] + ".png'>";
+    currentSet.innerHTML = "<p>&#129352</p><img class='lvlSilver' src='heroImages/"+ BestCountersSilver[j] + ".png'>";
     divCounters.appendChild(currentSet);
     }}
   if (BestCountersBronze[0]) {
   for (const j in BestCountersBronze ) {
     let currentSet = document.createElement("div");
     currentSet.classList.add("divHeroSmallSet");
-    currentSet.innerHTML = "<p>🥉</p><img class='lvlBronze' src='heroImages/"+ BestCountersBronze[j] + ".png'>";
+    currentSet.innerHTML = "<p>#129353</p><img class='lvlBronze' src='heroImages/"+ BestCountersBronze[j] + ".png'>";
     divCounters.appendChild(currentSet);
     }}
 }
