@@ -57,7 +57,7 @@ var iMessage = 0;
 function changeMessage() {
   let pMessage = document.getElementById("pMessage");
   
-  let messages = ['updated: 2020. 3. 1. (UTC +9)', 'Do you have <a href="https://forms.gle/iw1yCZ2RAv2Htys36"> any opinions </a> on this website?', 'please use <a href="https://api.heroesprofile.com/upload"> Heroes Profile Uploader </a>', "'Add to Home Screen' on your iPhone Safari"]
+  let messages = ['updated: 2020. 3. 7. (UTC +9)', 'Do you have <a href="https://forms.gle/iw1yCZ2RAv2Htys36"> any opinions </a> on this website?', 'please use <a href="https://api.heroesprofile.com/upload"> Heroes Profile Uploader </a>', "'Add to Home Screen' on your iPhone Safari"]
   
   pMessage.innerHTML = messages[iMessage];
   
@@ -70,7 +70,7 @@ var iDataInfo = 0;
 function changeDataInfo() {
   let pDataInfo = document.getElementById("pDataInfo");
   
-  let dataInfos = ["main data<br>v2.49.2.77981~ (heroes x maps)<br> v2.49~ (heroes x heroes)<br> source: <a href='https://api.heroesprofile.com'>Heroes Profile API</a>", "hero difficulty data<br>by Lucifer474 (<a href='https://1drv.ms/x/s!Ar0HIinrMYwPhJNzYBCXCPwRtxibQA?e=IZnVHV'> his work </a>)"];
+  let dataInfos = ["main data<br>v2.49.3.78256~ (heroes x maps)<br> v2.49~ (heroes x heroes)<br> source: <a href='https://api.heroesprofile.com'>Heroes Profile API</a>", "hero difficulty data<br>by Lucifer474 (<a href='https://1drv.ms/x/s!Ar0HIinrMYwPhJNzYBCXCPwRtxibQA?e=IZnVHV'> his work </a>)"];
   
   pDataInfo.innerHTML = dataInfos[iDataInfo];
   
